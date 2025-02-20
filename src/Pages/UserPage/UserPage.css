@@ -7,7 +7,7 @@
 }
 
 .userpage-card {
-  background-color: white;
+  background-color: rgb(206, 206, 206);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,6 @@
 }
 
 .google-button {
-  display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f44242;
