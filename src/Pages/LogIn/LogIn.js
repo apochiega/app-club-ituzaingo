@@ -18,11 +18,30 @@ const LogIn = () => {
   };
 
   return (
+    
     <div className="login-container">
       <div className="login-card">
-        <button onClick={handleGoogleLogin} className="google-button">
-          Iniciar sesión con Google
-        </button>
+        <img src="/image.png" alt="Ituzaingó Padel" className="logo" />
+        <h2>Iniciar sesión</h2>
+        <p>Ingrese sus credenciales para acceder al panel de administración</p>
+        <form className="login-form" >
+
+        
+          <label>Correo electronico</label>
+          <input
+            type="email"
+            placeholder="ingrese su correo"
+          />
+          <label>Contraseña</label>
+          <input
+            type="password"
+            placeholder="ingrese su contraseña" 
+          />
+          <button type="submit">Iniciar Sesión</button>
+          
+
+          </form>
+        
       </div>
     </div>
   );
