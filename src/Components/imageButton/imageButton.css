@@ -1,0 +1,22 @@
+.container-image-text {
+    position: relative;
+    border: none;
+    width: 45%;
+    background: none;
+}
+
+.imagen-cancha {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.texto-paquete {
+    position: absolute;
+    bottom: 0px;
+    left: 25px;
+    font-size: 25px;
+    color: white;
+    padding: 0px;
+}
+
