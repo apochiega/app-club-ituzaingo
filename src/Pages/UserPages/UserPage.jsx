@@ -17,7 +17,7 @@ const UserPage = ()=>{
             <div>
                 <Header/>
             </div>
-            <div className="mx-5">
+            <div className="">
                 <div className="title">
                     Usuarios
                 </div>
