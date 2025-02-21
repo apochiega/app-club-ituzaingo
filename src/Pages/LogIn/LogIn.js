@@ -14,7 +14,7 @@ const LogIn = () => {
       const token = await user.getIdToken();
 
 
-      const response = await fetch("http://127.0.0.1:8000/protected", {
+      const response = await fetch("http://127.0.0.1:8000/login/protected", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -23,6 +23,7 @@ const LogIn = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data)
         alert(`Bienvenido, ${user.displayName}. Acceso autorizado.`);
       } else {
         alert("Acceso denegado. Token inválido.");
