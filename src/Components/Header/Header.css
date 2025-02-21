@@ -1,0 +1,29 @@
+@media (max-width: 480px) { 
+    .image {
+        min-width: 100px
+    }
+}
+
+@media (max-width: 480px) { 
+    .logout {
+        max-width: 70px;
+        max-height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+
+    }
+}
+
+@media (max-width: 480px) { 
+    .inicio {
+        max-width: 80px;
+        max-height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+
+    }
+}
