@@ -1,8 +1,4 @@
-@media (max-width: 480px) { 
-    .image {
-        min-width: 100px
-    }
-}
+
 
 @media (max-width: 480px) { 
     .logout {
