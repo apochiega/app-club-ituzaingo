@@ -1,16 +1,21 @@
 import React from "react";
 import Header from "../../Components/Header/Header";
+import "./HomePage.css"
+import ImageButton from "../../Components/imageButton/imageButton";
 
-const HomePage= ()=>{
-
-    return(
+const HomePage = () => {
+    return (
         <div className="container">
-            <Header/>
-            <div className="fs-3 fw-bold">
-                Panel de administracion del club
+            <Header />
+            <div className="title">
+                Panel de administración del club
+            </div>
+            <div className="button-container">
+                <ImageButton text="Paquetes de cupones" image="./canchapadel.jpg" />
+                <ImageButton text="Usuarios" image="./canchapadel.jpg" />
             </div>
         </div>
-    )
+    );
 }
 
 export default HomePage;
