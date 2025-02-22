@@ -6,8 +6,34 @@
 
 .button-container {
     display: flex;
-    gap: 40px;  /* Espacio entre los botones */
+    gap: 40px;  
     min-height: 50vh;
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width:768px) {
+    .button-container{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .container-image-text{
+        width: 90%; /* Aumenta el tamaño de las tarjetas */
+        max-width: 400px;/* Evita que sean demasiado grandes en pantallas más anchas */
+    }
+    
+    .imagen-cancha{
+        width: 100%;
+        height: auto;
+    }
+
+    .button-container button {
+        width: 100%; 
+        max-width: 400px; 
+        font-size: 1.2rem; 
+        padding: 16px 24px; 
+    }
+}
+
+
