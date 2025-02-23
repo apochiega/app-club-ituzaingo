@@ -1,0 +1,83 @@
+/* styles.css */
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* Estilos para la tabla en pantallas grandes */
+  .table {
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+  
+  .table thead th {
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .table tbody tr {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table tbody tr td {
+    padding: 12px;
+    vertical-align: middle;
+  }
+  
+  /* Botón "Delete" en tabla */
+  .table tbody tr td button {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .table tbody tr td button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Tarjetas en vista móvil */
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Botón "Delete" en tarjetas */
+  .card button {
+    width: 100%;
+    background-color: #dc3545;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .card button:hover {
+    background-color: #c82333;
+  }
+  
