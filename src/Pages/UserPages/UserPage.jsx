@@ -24,14 +24,14 @@ const UserPage = ()=>{
                 <div className="d-flex gap-3 mt-5 w-50">
                     <input
                     type="text"
-                    className="form-control w-50"
+                    className="form-control"
                     value={userNumber}
                     onChange={(e) => setUserNumber(e.target.value)}
                     placeholder="Ingrese el numero de socio"
                     />
                     <input
                     type="text"
-                    className="form-control w-50"
+                    className="form-control"
                     value={cedula}
                     onChange={(e) => setCedula(e.target.value)}
                     placeholder="Ingrese la cedula"
