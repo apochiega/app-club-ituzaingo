@@ -3,6 +3,10 @@
         min-width: 100px
     }
 }
+.header-container{
+    margin-left: 30px;
+    margin-right: 30px;
+}
 
 @media (max-width: 480px) { 
     .logout {

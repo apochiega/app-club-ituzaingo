@@ -5,8 +5,7 @@ import ImageButton from "../../Components/imageButton/imageButton";
 
 const HomePage = () => {
     return (
-        <div className="container">
-            <Header />
+        <div>
             <div className="title">
                 Panel de administración del club
             </div>

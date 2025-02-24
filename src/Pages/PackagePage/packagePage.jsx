@@ -27,8 +27,7 @@ function PackagePage() {
 //   };
 
   return (
-    <div className="package-page">
-      <Header />
+    <div>
       <h1 className="title-package">Administrar paquetes de cupones</h1>
       <div className="table-container">
         <CollapsibleTable
@@ -38,7 +37,7 @@ function PackagePage() {
             // onEdit={editCoupon}
         />
       </div>
-      
+  
     </div>
   );
 }

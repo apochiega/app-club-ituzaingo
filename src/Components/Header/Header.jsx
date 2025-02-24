@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
-
 const Header = ()=>{
 
     const navigate= useNavigate();
@@ -12,8 +11,8 @@ const Header = ()=>{
     }
     
     return(
-        <div className="d-flex justify-content-between align-items-center">
-            <div className="imagee">
+        <div className="d-flex justify-content-between align-items-center header-container">
+            <div className="image-container">
                 <img className="w-25 image"  src="/padelogo.png" alt="logo"></img>
             </div>
             <div className="d-flex gap-3">
