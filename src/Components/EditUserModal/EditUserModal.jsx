@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Box, TextField, Button, Typography } from "@mui/material";
+import GreenButton from "../greenButton/greenButton";
 import "./EditUserModal.css";
 
 
@@ -55,9 +56,9 @@ const EditUserModal = ({ open, handleClose, user, onSave }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-          <Button onClick={handleSave} variant="contained" color="primary" sx={{ backgroundColor: "green", "&:hover": { backgroundColor: "darkgreen" } }}>
-            Guardar
-          </Button>
+
+          <GreenButton text="GUARDAR" minWidth="20%" onClick={handleSave} />
+          
           <Button onClick={handleClose} variant="outlined" sx={{ color: "red", borderColor: "red", "&:hover": { borderColor: "darkred", color: "darkred" } }}>
             Cancelar
           </Button>

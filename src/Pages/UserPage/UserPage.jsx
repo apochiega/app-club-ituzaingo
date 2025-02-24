@@ -3,7 +3,9 @@ import Header from "../../Components/Header/Header";
 import { useState } from "react";
 import { useEffect } from "react";
 import StickyHeadTable from "../../Components/Tables/userTable";
+import GreenButton from "../../Components/greenButton/greenButton";
 import "./UserPage.css";
+
 
 const UserPage = ()=>{
 
@@ -27,7 +29,7 @@ const UserPage = ()=>{
                 onChange={(e) => setUserNumber(e.target.value)}
                 placeholder="Ingrese el numero de socio"
                 />
-                <button className="btn btn-success" onClick={handleSearchUser}> Buscar </button>
+                <GreenButton text="Buscar" minWidth="20%" onClick={handleSearchUser} />
             </div>
             <div className="mt-5 ">
                 <StickyHeadTable/>

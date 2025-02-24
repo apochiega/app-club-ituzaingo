@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
+import GreenButton from "../greenButton/greenButton";
 
 
 const Header = ()=>{
@@ -17,8 +18,8 @@ const Header = ()=>{
                 <img className="w-25 image"  src="/padelogo.png" alt="logo"></img>
             </div>
             <div className="d-flex gap-3">
-                <button className="btn btn-success btn-lg logout" onClick={handleClick} alt="log in">Inicio</button>
-                <button className="btn btn-danger btn-lg ml-2 inicio" alt="log out">Logout</button>
+                <GreenButton text="Inicio" minWidth="50%" onClick={handleClick}/>
+                <button className="btn btn-danger btn-md ml-2 inicio" alt="log out">Logout</button>
             </div>
         </div>
     )
