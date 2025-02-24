@@ -1,5 +1,5 @@
 import Header from "../../Components/Header/Header";
-import "./packagepage.css";
+import "./PackagePage.css";
 import React, { useState } from "react";
 import CollapsibleTable from "../../Components/Tables/CollapsibleTable";
 

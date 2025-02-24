@@ -1,13 +1,12 @@
 import React from "react";
-import "./imageButton.css";
 
-function ImageButton({ text, image }) {
+const ImageButton = ({ text, onClick, image }) => {
     return (
-        <button className="container-image-text">
-            <img className="imagen-cancha" src={image} alt="cancha padel" />
-            <p className="texto-paquete">{text}</p>
-        </button>
+        <div onClick={onClick} style={{ cursor: "pointer", textAlign: "center" }}>
+            <img src={image} alt={text} style={{ width: "100px", height: "100px" }} />
+            <p>{text}</p>
+        </div>
     );
-}
+};
 
 export default ImageButton;

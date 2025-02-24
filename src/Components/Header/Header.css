@@ -8,20 +8,39 @@
     margin-right: 30px;
 }
 
+.green-button {
+    background-color: #2e7619; 
+    color: white;
+}
+
+.green-button:hover {
+    background-color: #255E13;
+    color: white;
+}
+
+.red-button {
+    background-color: #a52727; 
+    color: white;
+}
+
+.red-button:hover {
+    background-color: #831e1e;
+    color: white;
+}
+
 @media (max-width: 480px) { 
-    .logout {
+    .login {
         max-width: 70px;
         max-height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 16px;
-
     }
 }
 
 @media (max-width: 480px) { 
-    .inicio {
+    .logout {
         max-width: 80px;
         max-height: 40px;
         display: flex;

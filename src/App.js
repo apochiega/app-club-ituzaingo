@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './Pages/HomePage/HomePage';
 import UserPage from './Pages/UserPages/UserPage';
-import PackagePage from './Pages/PackagePage/packagePage';
+import PackagePage from './Pages/PackagePage/PackagePage';
 import Header from './Components/Header/Header';
 import { Col, Row } from 'react-bootstrap';
 
