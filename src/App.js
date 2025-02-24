@@ -11,6 +11,7 @@ function App() {
     <div>
       <Router>
         <Routes>
+          <Route path="/" element={<HomePage/>}/>
           <Route path="/HomePage" element={<HomePage/>}/>
           <Route path="/PackagePage" element={<PackagePage/>}/>
           <Route path="/UserPage" element={<UserPage/>}/>
