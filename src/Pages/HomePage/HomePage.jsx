@@ -9,11 +9,11 @@ const HomePage = () => {
     const navigate= useNavigate();
   
     return (
-        <div className="container-flex p-2 mt-2">
-            <div>
+        <div className="container-flex mt-2">
+            <div className="mx-3">
                 <Header/>
             </div>
-            <div className="">
+            <div className="mx-5">
                 <div className="title">
                     Panel de administración del club
                 </div>

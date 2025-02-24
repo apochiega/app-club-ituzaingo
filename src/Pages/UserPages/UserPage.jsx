@@ -1,4 +1,5 @@
 import React from "react";
+
 import Header from "../../Components/Header/Header";
 import "./UserPage.css"
 import { useState } from "react";
@@ -11,17 +12,19 @@ const UserPage = ()=>{
     const handleSearchUser = () => {
         //peticion a la api para encontrar el usuario
     };
+
+    
     
     return(
-        <div className="container-flex mx-5 mt-2">
-            <div>
+        <div className="container-flex mt-2">
+            <div className="mx-3">
                 <Header/>
             </div>
-            <div className="">
+            <div className="mx-5">
                 <div className="title">
                     Usuarios
                 </div>
-                <div className="d-flex gap-3 mt-5 w-50">
+                <div className="search-container mt-5">
                     <input
                     type="text"
                     className="form-control"
