@@ -10,6 +10,7 @@ import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { Edit } from "@mui/icons-material";
 import './userTable.css';
+import EditUserModal from '../EditUserModal/EditUserModal';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
@@ -21,6 +22,9 @@ const columns = [
 export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
   const [coupons, setCoupons] = useState({
     message: 'success',
     data: [
@@ -34,7 +38,9 @@ export default function StickyHeadTable() {
   }, []);
 
   const onEdit = (item) => {
-    console.log("Editar clickeado para:", item);
+    console.log("Usuario seleccionado para edición:", item);
+    setSelectedUser(item);
+    setOpenModal(true);
   };
 
   const rows = coupons.data.map((item) => ({
@@ -45,6 +51,19 @@ export default function StickyHeadTable() {
       </IconButton>
     ),
   }));
+
+  const handleSave = (member_number, tickets, description) => {
+    setCoupons((prev) => ({
+      ...prev,
+      data: prev.data.map((user) =>
+        user.member_number === member_number
+          ? { ...user, tickets }
+          : user
+      ),
+    }));
+    console.log(`Guardando en BD: Usuario ${member_number}, Tickets: ${tickets}, Descripción: "${description}"`);
+  };
+  
   
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -100,6 +119,12 @@ export default function StickyHeadTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+      <EditUserModal
+        open={openModal}
+        handleClose={() => setOpenModal(false)}
+        user={selectedUser}
+        onSave={handleSave}
       />
     </Paper>
   );

@@ -8,12 +8,11 @@ import "./UserPage.css";
 const UserPage = ()=>{
 
     const [userNumber, setUserNumber] = useState("");
-    const [cedula,setCedula]= useState("");
 
     const handleSearchUser = () => {
         //peticion a la api para encontrar el usuario
     };
-    
+
     return(
         <div className="containerUser">
             <Header/>
