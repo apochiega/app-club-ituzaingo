@@ -89,7 +89,10 @@ export default function StickyHeadTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        sx={{ border: '0.5px solid #333'}}
+        sx={{ border: '0.5px solid #333',
+        '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+          marginBottom: 0, 
+        },}}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
