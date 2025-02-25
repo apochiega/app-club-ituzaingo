@@ -37,6 +37,7 @@ const UserPage = ()=>{
                     placeholder="Ingrese la cedula"
                     />
                     <button className="btn btn-success" onClick={handleSearchUser}> Buscar </button>
+
                 </div>
             </div>
         </div>
