@@ -9,14 +9,15 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { Edit } from "@mui/icons-material";
-import './userTable.css';
+import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
+import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
   { id: 'member_number', label: 'Número de Socio', minWidth: 100, align: 'left' },
-  { id: 'tickets', label: 'Tickets', minWidth: 100, align: 'left' },
-  { id: 'edit', label: 'Acción', minWidth: 100, align: 'left' },
+  { id: 'partidos', label: 'Partidos', minWidth: 100, align: 'left' },
+  { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
 ];
 
 export default function UserTable() {
@@ -28,8 +29,8 @@ export default function UserTable() {
   const [coupons, setCoupons] = useState({
     message: 'success',
     data: [
-      { name: 'micaela procofio', member_number: 1, tickets: 7 },
-      { name: 'juliana hernandez', member_number: 2, tickets: 16 },
+      { name: 'micaela procofio', member_number: 1, partidos: 7 },
+      { name: 'juliana hernandez', member_number: 2, partidos: 16 },
     ],
   });
 
@@ -43,26 +44,44 @@ export default function UserTable() {
     setOpenModal(true);
   };
 
-  const rows = coupons.data.map((item) => ({
-    ...item,
-    edit: (
-      <IconButton onClick={() => onEdit(item)} color="primary">
-        <Edit />
-      </IconButton>
-    ),
-  }));
-
-  const handleSave = (member_number, tickets, description) => {
+  const handleSave = (member_number, partidos, description) => {
     setCoupons((prev) => ({
       ...prev,
       data: prev.data.map((user) =>
         user.member_number === member_number
-          ? { ...user, tickets }
+          ? { ...user, partidos }
           : user
       ),
     }));
-    console.log(`Guardando en BD: Usuario ${member_number}, Tickets: ${tickets}, Descripción: "${description}"`);
+    console.log(`Guardando en BD: Usuario ${member_number}, Partidos: ${partidos}, Descripción: "${description}"`);
   };
+
+  const handleDecrement = (member_number) => {
+    setCoupons((prev) => ({
+      ...prev,
+      data: prev.data.map((user) =>
+        user.member_number === member_number && user.partidos > 0
+          ? { ...user, partidos: user.partidos - 1 }
+          : user
+      ),
+    }));
+  };
+
+  const rows = coupons.data.map((item) => ({
+    ...item,
+    edit: (
+      <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
+        <DecreaseMatchCountButton memberNumber={item.member_number} onDecrement={handleDecrement} />
+        <IconButton onClick={() => onEdit(item)} color="primary">
+          <Edit />
+        </IconButton>
+        </div>
+    ),
+  }));
+  
+
+ 
+  
   
   
   const handleChangePage = (event, newPage) => {

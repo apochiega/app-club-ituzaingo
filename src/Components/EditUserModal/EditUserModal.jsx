@@ -5,19 +5,19 @@ import "./EditUserModal.css";
 
 
 const EditUserModal = ({ open, handleClose, user, onSave }) => {
-  const [tickets, setTickets] = useState(0);
+  const [partidos, setPartido] = useState(0);
   const [description, setDescription] = useState("");
 
   // console.log('tickets', tickets);
 
   const handleSave = () => {
-    onSave(user.member_number, tickets, description);
+    onSave(user.member_number, partidos, description);
     handleClose();
   };
 
   useEffect(() => {
     if (user) {
-      setTickets(user.tickets);
+      setPartido(user.partidos);
     }
   }, [user]);
 
@@ -41,12 +41,12 @@ const EditUserModal = ({ open, handleClose, user, onSave }) => {
         </Typography>
 
         <TextField
-          label="Tickets"
+          label="Partidos"
           type="number"
           fullWidth
           margin="normal"
-          value={tickets}
-          onChange={(e) => setTickets(Number(e.target.value))}
+          value={partidos}
+          onChange={(e) => setPartido(Number(e.target.value))}
         />
         <TextField
           label="Descripción"
