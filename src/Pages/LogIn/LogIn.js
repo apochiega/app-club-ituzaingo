@@ -17,7 +17,9 @@ const LogIn = () => {
 
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
-      const token = await user.getIdToken(); 
+      const token = await user.getIdToken();
+      console.log("Token de acceso:", token);
+
       navigate("/HomePage"); 
       alert(`Bienvenido, ${user.displayName}`);
     } catch (error) {
@@ -30,11 +32,17 @@ const LogIn = () => {
     e.preventDefault(); // Evita la recarga de la página
     console.log("Email ingresado:", email);
     console.log("Contraseña ingresado:", password);
-
   
     const auth = getAuth(app);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user; // Extraer el usuario
+      console.log("Usuario autenticado:", user);
+
+      // Obtener el token de acceso correctamente
+        const token = await user.getIdToken();
+        console.log("Token de acceso:", token);
+
       alert(`Bienvenido, ${userCredential.user.email}`);
       navigate("/HomePage");
     } catch (error) {
