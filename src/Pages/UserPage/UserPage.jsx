@@ -16,8 +16,7 @@ const UserPage = ()=>{
     };
 
     return(
-        <div className="containerUser">
-            <Header/>
+        <div>
             <div className="fs-2 fw-bold">
                 Usuarios
             </div>
