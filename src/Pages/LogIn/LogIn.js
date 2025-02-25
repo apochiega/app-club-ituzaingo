@@ -22,7 +22,7 @@ const LogIn = () => {
     <div className="login-container">
       <div className="login-card">
         <img src="/image.png" alt="Ituzaingó Padel" className="logo" />
-        <h2>Iniciar sesión</h2>
+        <h2 className="login-title">Iniciar sesión</h2>
         <p>Ingrese sus credenciales para acceder al panel de administración</p>
         <form className="login-form" >
 

@@ -4,20 +4,45 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './Pages/HomePage/HomePage';
 import UserPage from './Pages/UserPage/UserPage';
 import PackagePage from './Pages/PackagePage/packagePage';
-import StickyHeadTable from './Components/Tables/userTable';
+import LogIn from './Pages/LogIn/LogIn';
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/HomePage" element={<HomePage/>}/>
-          <Route path="/PackagePage" element={<PackagePage/>}/>
-          <Route path="/UserPage" element={<UserPage/>}/>
+          <Route path="/" element={<LogIn />} />
+          
+          {/* Rutas protegidas */}
+          <Route 
+            path="/HomePage" 
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/PackagePage" 
+            element={
+              <ProtectedRoute>
+                <PackagePage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/UserPage" 
+            element={
+              <ProtectedRoute>
+                <UserPage />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </Router>
-    </div>
+    </AuthProvider>
   );
 }
 
