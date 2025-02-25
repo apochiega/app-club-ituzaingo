@@ -31,7 +31,7 @@
     .button-container button {
         width: 80%; /* Aumenta el tamaño de los botones */
         max-width: 300px; /* Evita que sean demasiado grandes */
-        front-size: 1.2rem; /* Aumenta el tamaño del texto */
+        font-size: 1.2rem; /* Aumenta el tamaño del texto */
         padding: 12px 20px; /* Hace el botón más grande */
     }
 }

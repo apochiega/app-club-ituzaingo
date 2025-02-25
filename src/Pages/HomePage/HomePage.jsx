@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../Components/Header/Header";
 import "./HomePage.css"
-import ImageButton from "../../Components/imageButton/imageButton";
+import ImageButton from "../../Components/ImageButton/ImageButton";
 
 const HomePage = () => {
     return (
