@@ -1,10 +1,10 @@
-import "./PackagePage.css"; 
+import "./PackagesPage.css"; 
 import React, { useState } from "react";
 import CollapsibleTable from "../../Components/Tables/CollapsibleTable";
 import EditPackageModal from "../../Components/Modal/EditPackageModal";
 import DeleteConfirmationModal from "../../Components/Modal/DeletePackageModal";
 
-function PackagePage() {
+function PackagesPage() {
   const [coupons, setCoupons] = useState({
     message: "success",
     data: [
@@ -92,4 +92,4 @@ function PackagePage() {
   );
 }
 
-export default PackagePage;
+export default PackagesPage;

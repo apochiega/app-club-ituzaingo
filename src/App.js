@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './Pages/HomePage/HomePage';
 import UserPage from './Pages/UserPage/UserPage';
-import PackagePage from "./Pages/PackagePage/PackagePage"
+import PackagesPage from './Pages/PackagesPage/PackagesPage';
 import Header from './Components/Header/Header';
 import { Col, Row } from 'react-bootstrap';
 
@@ -19,7 +19,7 @@ function App() {
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/HomePage" element={<HomePage />} />
                 <Route path="/UserPage" element={<UserPage />} />
-                <Route path="/PackagePage" element={<PackagePage />} />
+                <Route path="/PackagePage" element={<PackagesPage />} />
               </Routes>
             </div>
           </Col>
