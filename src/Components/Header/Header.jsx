@@ -14,7 +14,7 @@ const Header = ()=>{
     return(
         <div className="d-flex justify-content-between align-items-center">
             <div className="imagee">
-                <img className="w-25 image"  src="/padelogo.png" alt="logo"></img>
+                <img className="w-25 image"  onClick={handleClick} src="/padelogo.png" alt="logo"></img>
             </div>
             <div className="d-flex gap-3">
                 <button className="btn btn-success btn-lg logout" onClick={handleClick} alt="log in">Inicio</button>

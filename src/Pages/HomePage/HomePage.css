@@ -6,7 +6,7 @@
 
 .button-container {
     display: flex;
-    gap: 40px;  /* Espacio entre los botones */
+    gap: 40px;  
     min-height: 50vh;
     justify-content: center;
     align-items: center;
@@ -19,8 +19,8 @@
     }
 
     .container-image-text{
-        width: 90%; /* Aumenta el tamaño de las tarjetas */
-        max-width: 400px;/* Evita que sean demasiado grandes en pantallas más anchas */
+        width: 90%;
+        max-width: 400px;
     }
     
     .imagen-cancha{
@@ -29,9 +29,9 @@
     }
 
     .button-container button {
-        width: 80%; /* Aumenta el tamaño de los botones */
-        max-width: 300px; /* Evita que sean demasiado grandes */
-        font-size: 1.2rem; /* Aumenta el tamaño del texto */
-        padding: 12px 20px; /* Hace el botón más grande */
+        width: 80%; 
+        max-width: 300px; 
+        font-size: 1.2rem; 
+        padding: 12px 20px; 
     }
 }
