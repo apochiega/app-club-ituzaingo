@@ -1,50 +1,45 @@
 import Header from "../../Components/Header/Header";
-import "./packagepage.css"; 
+import "./PackagePage.css";
 import React, { useState } from "react";
-import ResponsiveTable from "../../Components/ResponsiveTable/ResponsiveTable";
+import CollapsibleTable from "../../Components/Tables/CollapsibleTable";
 
 function PackagePage() {
-    var [coupons, setCoupons] = useState([
-        {
-          name: "Ticketera",
-          expiration_date: "12/12/2025",
-          price: 3200,
-          coupon: 8,
-        },{
-          name: "Ticketera",
-          expiration_date: "12/12/2025",
-          price: 5600,
-          coupon: 16,
-        },
-        {
-          name: "Ticketera",
-          expiration_date: "12/12/2025",
-          price: 8000,
-          coupon: 20,
-        }
-      ]);
-    
-    const deleteCoupon = (couponToDelete) => {
-        setCoupons(coupons.filter((coupon) => coupon !== couponToDelete));
-    };
+  var [coupons, setCoupons] = useState({"message":"success","data":[{"id":1,"description":"ticketera 8 tickets","title":"8 tickets","price":3200,"ticket_quantity":8},{"id":2,"description":"ticketera 16 tickets","title":"16 tickets","price":5000,"ticket_quantity":16}]});
 
-    const editCoupon = (couponToEdit) => { 
-        setCoupons(coupons.filter((coupon) => coupon !== couponToEdit));
-    };
+  const deleteCoupon = (couponToDelete) => {
+    setCoupons((prevCoupons) => ({
+      ...prevCoupons,
+      data: prevCoupons.data.filter((coupon) => coupon.id !== couponToDelete.id),
+    }));
+  };
+  
+//   const editCoupon = (couponToEdit) => {
+//     setCoupons((prevCoupons) => ({
+//       ...prevCoupons,
+//       data: prevCoupons.data.filter((coupon) => coupon.id !== couponToEdit.id),
+//     }));
+//   };
+  
+  
+//   const editCoupon = (couponToEdit) => {
+//     // navigate(`/edit/${couponToEdit.id}`, { state: { coupon: couponToEdit } });
+//     setCoupons((prevCoupons) => prevCoupons.filter((coupon) => coupon.id !== couponToEdit.id));
+//   };
 
-    return (
-        <div>
-            <Header />
-            <h1 className="titlePackage"> Administrar paquetes de cupones</h1>
-            <ResponsiveTable
-                data={coupons}
-                keysToShow={["name", "expiration_date", "price", "coupon"]}
-                onDelete={deleteCoupon}
-                onEdit={editCoupon}
-                isHistory = {0}
-            />
-        </div>
-    )
+  return (
+    <div>
+      <h1 className="title-package">Administrar paquetes de cupones</h1>
+      <div className="table-container">
+        <CollapsibleTable
+            data={coupons.data}
+            keysToShow={["description", "title", "price", "ticket_quantity"]}
+            onDelete={deleteCoupon}
+            // onEdit={editCoupon}
+        />
+      </div>
+      
+    </div>
+  );
 }
 
 export default PackagePage;
