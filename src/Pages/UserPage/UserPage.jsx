@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../Components/Header/Header";
 import { useState } from "react";
 import { useEffect } from "react";
-import StickyHeadTable from "../../Components/Tables/userTable";
+import UserTable from "../../Components/Tables/userTable";
 import GreenButton from "../../Components/greenButton/greenButton";
 import "./UserPage.css";
 
@@ -32,7 +32,7 @@ const UserPage = ()=>{
                 <GreenButton text="Buscar" minWidth="20%" onClick={handleSearchUser} />
             </div>
             <div className="mt-5 ">
-                <StickyHeadTable/>
+                <UserTable/>
             </div>
         </div>
     )

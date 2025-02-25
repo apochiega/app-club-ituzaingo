@@ -19,7 +19,7 @@ const columns = [
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'left' },
 ];
 
-export default function StickyHeadTable() {
+export default function UserTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedUser, setSelectedUser] = useState(null);
