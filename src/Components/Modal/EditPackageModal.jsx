@@ -10,6 +10,13 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
 
   if (!updatedCoupon) return null;
 
+  const handlePriceChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*(\.\d{0,2})?$/.test(value)) { // Permite números positivos con hasta 2 decimales y vacío
+      setUpdatedCoupon({ ...updatedCoupon, price: value });
+    }
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -34,18 +41,22 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
         <TextField
           label="Precio"
           fullWidth
-          type="number"
-          value={updatedCoupon.price}
-          onChange={(e) => setUpdatedCoupon({ ...updatedCoupon, price: parseFloat(e.target.value) || 0 })}
+          type="text"
+          value={updatedCoupon.price === "0" ? "" : updatedCoupon.price}
+          onChange={handlePriceChange}
           margin="normal"
+          inputMode="decimal"
+          pattern="[0-9]*(\.[0-9]{0,2})?"
+          min="0"
         />
         <TextField
           label="Tickets"
           fullWidth
           type="number"
           value={updatedCoupon.ticket_quantity}
-          onChange={(e) => setUpdatedCoupon({ ...updatedCoupon, ticket_quantity: parseInt(e.target.value) || 0 })}
+          onChange={(e) => setUpdatedCoupon({ ...updatedCoupon, ticket_quantity: Math.max(0, parseInt(e.target.value) || 0) })}
           margin="normal"
+          min="0"
         />
         <Button
           variant="contained"
