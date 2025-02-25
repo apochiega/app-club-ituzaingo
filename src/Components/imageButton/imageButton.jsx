@@ -1,5 +1,5 @@
 import React from "react";
-import "./ImageButton.css";
+import "./imageButton.css";
 
 function ImageButton({ text, image, onClick }) {
     return (

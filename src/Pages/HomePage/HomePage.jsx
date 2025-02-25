@@ -1,6 +1,6 @@
 import React from "react";
 import "./HomePage.css"
-import ImageButton from "../../Components/ImageButton/ImageButton";
+import ImageButton from "../../Components/ImageButton/imageButton";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {

@@ -1,4 +1,4 @@
-import "./PackagePage.css"; 
+import "./packagePage.css"; 
 import React, { useState } from "react";
 import CollapsibleTable from "../../Components/Tables/CollapsibleTable";
 import EditPackageModal from "../../Components/Modal/EditPackageModal";
