@@ -9,6 +9,12 @@
   pointer-events: none;
 }
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
 
 @media (prefers-reduced-motion: no-preference) {
