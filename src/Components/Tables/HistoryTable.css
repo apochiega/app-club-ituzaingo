@@ -1,0 +1,135 @@
+.history-table-container .mt-5 {
+  margin-top: 5rem;
+}
+
+.history-table-container .table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.history-table-container .table {
+  width: 100%;
+  margin-bottom: 0; /* Cambiado para eliminar el espacio entre la tabla y la paginación */
+  color: #212529;
+  vertical-align: top;
+  border-color: #000000;
+  border-radius: 8px 8px 0 0; /* Bordes redondeados solo en la parte superior */
+  overflow: hidden; /* Asegura que los bordes redondeados se muestren correctamente */
+}
+
+.history-table-container .table > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--bs-table-bg);
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.history-table-container .table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: rgba(0, 0, 0, 0.05);
+}
+
+.history-table-container .table-hover > tbody > tr:hover {
+  --bs-table-accent-bg: rgba(0, 0, 0, 0.075);
+}
+
+.history-table-container .text-right {
+  text-align: right !important;
+}
+
+.history-table-container .table th.title {
+  background-color: #255E13;
+  color: white;
+}
+
+.history-table-container .ml-mr-20 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Estilos actualizados para la paginación */
+.history-table-container .pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 20px;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #000000; /* Agregado borde negro */
+  border-top: none; /* Elimina el borde superior para unirlo con la tabla */
+  border-radius: 0 0 8px 8px; /* Bordes redondeados solo en la parte inferior */
+  background-color: #fff; /* Fondo blanco para consistencia */
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.history-table-container .rows-per-page {
+  display: flex;
+  align-items: center;
+  margin-right: 32px;
+}
+
+.history-table-container .rows-per-page span {
+  color: rgba(0, 0, 0, 0.6);
+  margin-right: 8px;
+}
+
+.history-table-container .rows-select {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.87);
+  border: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  width: auto;
+  background: none;
+  cursor: pointer;
+}
+
+.history-table-container .pagination-range {
+  margin-right: 32px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.history-table-container .pagination-actions {
+  display: flex;
+  gap: 24px;
+}
+
+.history-table-container .pagination-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-table-container .pagination-button:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.history-table-container .pagination-arrow {
+  fill: currentColor;
+}
+
+@media (max-width: 600px) {
+  .history-table-container .pagination-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .history-table-container .rows-per-page {
+    margin-right: 16px;
+  }
+
+  .history-table-container .pagination-range {
+    margin-right: 16px;
+  }
+}
+
