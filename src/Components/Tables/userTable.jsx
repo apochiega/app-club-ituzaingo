@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { Edit } from "@mui/icons-material";
-import './userTable.css';
+import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
 
