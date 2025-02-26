@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage/HomePage';
 import UserPage from './Pages/UserPage/UserPage';
 import PackagesPage from './Pages/PackagesPage/PackagesPage';
 import Header from './Components/Header/Header';
+import LogIn from './Pages/LogIn/LogIn';
 import { Col, Row } from 'react-bootstrap';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
           <Col>
             <div>
               <Routes>
-                <Route path="/" element={<HomePage/>}/>
+                <Route path="/" element={<LogIn/>}/>
                 <Route path="/HomePage" element={<HomePage />} />
                 <Route path="/UserPage" element={<UserPage />} />
                 <Route path="/PackagePage" element={<PackagesPage />} />
