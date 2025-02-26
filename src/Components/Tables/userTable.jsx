@@ -8,7 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
-import { Edit } from "@mui/icons-material";
+import { Edit, LocalActivity } from "@mui/icons-material";
+import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
 import './userTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
@@ -26,6 +27,9 @@ export default function UserTable() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedUser, setSelectedUser] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [userToDecrement, setUserToDecrement] = useState(null);
+
 
   const [coupons, setCoupons] = useState({
     message: 'success',
@@ -68,21 +72,26 @@ export default function UserTable() {
     }));
   };
 
+  const handleOpenConfirmModal = (member_number) => {
+    setUserToDecrement(member_number);
+    setOpenConfirmModal(true);
+  };
+
+  const handleConfirmDecrement = () => {
+    handleDecrement(userToDecrement);
+    setOpenConfirmModal(false);
+  };
+
   const rows = coupons.data.map((item) => ({
     ...item,
     edit: (
       <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
-        <DecreaseMatchCountButton memberNumber={item.member_number} onDecrement={handleDecrement} />
-        <IconButton onClick={() => onEdit(item)} color="primary">
-          <Edit />
+        <IconButton  onClick={() => handleOpenConfirmModal(item.member_number)}  color="primary">
+          <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
         </IconButton>
         </div>
     ),
   }));
-  
-
- 
-  
   
   
   const handleChangePage = (event, newPage) => {
@@ -145,6 +154,11 @@ export default function UserTable() {
         handleClose={() => setOpenModal(false)}
         user={selectedUser}
         onSave={handleSave}
+      />
+      <ConfirmDecrementModal
+        open={openConfirmModal}
+        handleClose={() => setOpenConfirmModal(false)}
+        handleConfirm={handleConfirmDecrement}
       />
     </Paper>
   );

@@ -1,19 +1,19 @@
 .decrease-button
 {
-    color:red;
-    border: 2px solid red;
+    color:rgb(255, 255, 255);
     border-radius: 6px;
     cursor: pointer;
     padding: 10px;
-    background-color: white;
+    background-color: rgb(121, 9, 9);
     font-weight: bold; 
+    border: none;
 
 }
 
 .decrease-button:hover
 {
-    border-color:darkred;
-    color:darkred;
+    color:rgb(255, 255, 255);
+    background-color: rgb(162, 36, 36);
 }
 
 
