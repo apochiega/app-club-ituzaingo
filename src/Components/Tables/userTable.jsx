@@ -9,12 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { Edit } from "@mui/icons-material";
-import './UserTable.css';
+import './userTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
+  { id: 'telefono', label: 'Télefono', minWidth: 170, align: 'left' },
   { id: 'member_number', label: 'Número de Socio', minWidth: 100, align: 'left' },
   { id: 'partidos', label: 'Partidos', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
@@ -29,8 +30,8 @@ export default function UserTable() {
   const [coupons, setCoupons] = useState({
     message: 'success',
     data: [
-      { name: 'micaela procofio', member_number: 1, partidos: 7 },
-      { name: 'juliana hernandez', member_number: 2, partidos: 16 },
+      { name: 'micaela procofio', telefono: '098123456', member_number: 1, partidos: 7 },
+      { name: 'juliana hernandez', telefono: '098823451', member_number: 2, partidos: 16 },
     ],
   });
 
