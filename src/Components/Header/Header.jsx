@@ -24,12 +24,7 @@ const Header = ()=>{
                 <img className="w-25 image"  onClick={handleClick} src="/padelogo.png" alt="logo"></img>
             </div>
             <div className="d-flex gap-3">
-<<<<<<< Updated upstream
                 <button className="btn btn-danger btn-md ml-2 inicio" alt="log out">Logout</button>
-=======
-                <GreenButton text="Inicio" minWidth="50%" onClick={handleClick}/>
-                <button className="btn btn-danger btn-md ml-2 inicio" alt="log out" onClick={handleLogout}>Logout</button>
->>>>>>> Stashed changes
             </div>
         </div>
     )
