@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import apiService from "../../axiosApiService/axiosWrapper"
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,9 +12,11 @@ import IconButton from "@mui/material/IconButton";
 import { Edit } from "@mui/icons-material";
 import './userTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
+import axios from 'axios';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
+  {id: 'telefono', label: 'Telefono', minWidth: 100, align: 'left' },
   { id: 'member_number', label: 'Número de Socio', minWidth: 100, align: 'left' },
   { id: 'tickets', label: 'Tickets', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'left' },
@@ -24,18 +27,15 @@ export default function UserTable() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedUser, setSelectedUser] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [users,setUsers] = useState([]);
 
-  const [coupons, setCoupons] = useState({
-    message: 'success',
-    data: [
-      { name: 'micaela procofio', member_number: 1, tickets: 7 },
-      { name: 'juliana hernandez', member_number: 2, tickets: 16 },
-    ],
-  });
-
-  useEffect(() => {
-
-  }, []);
+  useEffect(()=>{
+      const usersData= async()=>{
+          const response= await apiService.getAllUsers();
+          setUsers(response.data)
+        }
+        usersData()
+    }, []);
 
   const onEdit = (item) => {
     console.log("Usuario seleccionado para edición:", item);
@@ -43,19 +43,10 @@ export default function UserTable() {
     setOpenModal(true);
   };
 
-  const rows = coupons.data.map((item) => ({
-    ...item,
-    edit: (
-      <IconButton onClick={() => onEdit(item)} color="primary">
-        <Edit />
-      </IconButton>
-    ),
-  }));
-
-  const handleSave = (member_number, tickets, description) => {
-    setCoupons((prev) => ({
+  const handleSave = (member_number, tickets, description) => { //member-number????
+    setUsers((prev) => ({
       ...prev,
-      data: prev.data.map((user) =>
+      data: prev.map((user) =>
         user.member_number === member_number
           ? { ...user, tickets }
           : user
@@ -63,7 +54,15 @@ export default function UserTable() {
     }));
     console.log(`Guardando en BD: Usuario ${member_number}, Tickets: ${tickets}, Descripción: "${description}"`);
   };
-  
+
+  const rows = users.map((item) => ({ 
+    ...item,
+    edit: (
+      <IconButton onClick={() => onEdit(item)} color="primary">
+        <Edit />
+      </IconButton>
+    ),
+  }));
   
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
