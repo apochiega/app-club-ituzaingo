@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import UserTable from "../../Components/Tables/UserTable";
 import GreenButton from "../../Components/greenButton/greenButton";
 import "./UserPage.css";
+import axios from 'axios';
 
 
 const UserPage = ()=>{
