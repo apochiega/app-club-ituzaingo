@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import apiService from "../../axiosApiService/axiosWrapper"
 import "./HistoryTable.css"
 
 const columns = [
@@ -19,24 +20,18 @@ const HistoryTable = () => {
     fetchTransactions()
   }, [page, rowsPerPage])
 
-  const fetchTransactions = () => {
-    // Simular una llamada a la API
-    const mockData = []
-    const start = page * rowsPerPage + 1
-    const end = start + rowsPerPage
-    for (let i = start; i < end; i++) {
-      mockData.push({
-        member_number: `000${i}`,
-        email: `user${i}@example.com`,
-        tickets: Math.floor(Math.random() * 20) + 1,
-        description: `Reserva ${Math.floor(Math.random() * 3) + 1} hora(s)`,
-        date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString(),
-      })
+  const fetchTransactions = async () => {
+    try {
+      const response = await apiService.getAllTransactions()
+      const data = response.data
+
+      // Ordenar por fecha, la más reciente primero
+      data.sort((a, b) => new Date(b.date) - new Date(a.date))
+      setTransactions(data)
+      setTotalTransactions(data.length) // Ajustar el total de transacciones basado en la respuesta
+    } catch (error) {
+      console.error("Error fetching transactions:", error)
     }
-    // Ordenar por fecha, la más reciente primero
-    mockData.sort((a, b) => new Date(b.date) - new Date(a.date))
-    setTransactions(mockData)
-    setTotalTransactions(100) // Simular un total de 100 transacciones
   }
 
   const handleChangePage = (newPage) => {
@@ -75,8 +70,8 @@ const HistoryTable = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((row) => (
-                <tr key={row.member_number}>
+              {transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                <tr key={row.user_id}>
                   {columns.map((column) => {
                     const value = row[column.id]
                     return (
@@ -127,4 +122,3 @@ const HistoryTable = () => {
 }
 
 export default HistoryTable
-
