@@ -34,7 +34,7 @@ export default function UserTable() {
   });
 
   useEffect(() => {
-    // Aquí deberías hacer la petición real al backend con fetch o axios.
+
   }, []);
 
   const onEdit = (item) => {
