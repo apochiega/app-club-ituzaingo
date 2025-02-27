@@ -11,6 +11,8 @@ import Header from "./Components/Header/Header";
 import LogIn from "./Pages/LogIn/LogIn";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import { Container, Row, Col } from "react-bootstrap";
+import PaymentButton from "./Components/Payment/PaymentButton";
+
 
 function App() {
     const [user, setUser] = useState(null);
@@ -39,17 +41,18 @@ function App() {
                   <Row>
                       <Col >
                       <Routes>
-                          <Route path="/login" element={!user ? <LogIn /> : <Navigate to="/" />} />
+                          <Route path="/PaymentButton" element={!user ? <PaymentButton /> : <Navigate to="/" />} />
                           {user ? (
                               <>
-                                  <Route path="/" element={<HomePage />} />
+                                  <PaymentButton />
+                                  <Route path="/" element={<PaymentButton />} />
                                   <Route path="/HomePage" element={<HomePage />} />
                                   <Route path="/UserPage" element={<UserPage />} />
                                   <Route path="/PackagePage" element={<PackagesPage />} />
                                   <Route path="/HistoryPage" element={<HistoryPage />} />
                               </>
                           ) : (
-                              <Route path="/*" element={<Navigate to="/login" />} />
+                              <Route path="/*" element={<Navigate to="/PaymentButton" />} />
                           )}
                       </Routes>
 
