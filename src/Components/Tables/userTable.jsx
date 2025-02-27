@@ -62,7 +62,7 @@ export default function UserTable() {
   };
 
   const handleDecrement = (member_number) => {
-    setCoupons((prev) => ({
+    setUsers((prev) => ({
       ...prev,
       data: prev.data.map((user) =>
         user.member_number === member_number && user.partidos > 0
@@ -82,7 +82,7 @@ export default function UserTable() {
     setOpenConfirmModal(false);
   };
 
-  const rows = coupons.data.map((item) => ({
+  const rows = users.data.map((item) => ({
     ...item,
     edit: (
       <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
