@@ -5,10 +5,10 @@ import HistoryTable from "../../Components/Tables/HistoryTable";
 const HistoryPage = () => {
   return (
     <div className="history-page">
-      <h1 className="textTitle z-index-999">Historial de transacciones</h1>
+      <h1 className="fs-2 fw-bold">Historial de transacciones</h1>
       
       <div className="history-table">  
-      <HistoryTable />
+        <HistoryTable />
       </div>
     </div>
   );
