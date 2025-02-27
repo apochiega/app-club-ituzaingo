@@ -47,7 +47,7 @@ export const logIn = async (email, password) => {
 // Obtener el rol del usuario desde Firestore
 export const getUserRole = async (uid) => {
     try {
-        const userDoc = await getDoc(doc(db, "users", uid)); // Cambié "admin" por "users"
+        const userDoc = await getDoc(doc(db, "users", uid)); 
         if (userDoc.exists()) {
             console.log("Rol obtenido:", userDoc.data().role);
             return userDoc.data().role; // "admin" o "user"
@@ -62,5 +62,6 @@ export const getUserRole = async (uid) => {
 
 // Cerrar sesión
 export const logOut = async () => {
+    sessionStorage.removeItem("authToken");
     await signOut(auth);
 };

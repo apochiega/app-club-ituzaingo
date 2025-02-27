@@ -12,8 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import { Edit } from "@mui/icons-material";
 import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
-import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
-import axios from 'axios';
+
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
@@ -38,13 +37,27 @@ export default function UserTable() {
         usersData()
     }, []);
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+        try {
+            const response = await apiService.users.getAll();
+            setUsers(response.data); 
+        } catch (error) {
+            console.error("Error al obtener usuarios:", error);
+        }
+    };
+
+    fetchUsers();
+  }, []);
+
+
   const onEdit = (item) => {
     console.log("Usuario seleccionado para edición:", item);
     setSelectedUser(item);
     setOpenModal(true);
   };
 
-  const handleSave = (member_number, tickets, description) => { //member-number????
+  const handleSave = (member_number, partidos, description) => { //member-number????
     setUsers((prev) => ({
       ...prev,
       data: prev.map((user) =>
@@ -56,17 +69,6 @@ export default function UserTable() {
     console.log(`Guardando en BD: Usuario ${member_number}, Partidos: ${partidos}, Descripción: "${description}"`);
   };
 
-  const handleDecrement = (member_number) => {
-    setCoupons((prev) => ({
-      ...prev,
-      data: prev.data.map((user) =>
-        user.member_number === member_number && user.partidos > 0
-          ? { ...user, partidos: user.partidos - 1 }
-          : user
-      ),
-    }));
-  };
- 
   const rows = users.map((item) => ({ 
     ...item,
     edit: (
