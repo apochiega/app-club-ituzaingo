@@ -1,0 +1,10 @@
+.table-container th, .table-container td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+    
+}
+.table-container table {
+    border-collapse: collapse;
+    border: 1px solid #333; 
+}

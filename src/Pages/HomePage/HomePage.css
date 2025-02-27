@@ -19,8 +19,8 @@
     }
 
     .container-image-text{
-        width: 90%; /* Aumenta el tamaño de las tarjetas */
-        max-width: 400px;/* Evita que sean demasiado grandes en pantallas más anchas */
+        width: 90%;
+        max-width: 400px;
     }
     
     .imagen-cancha{
@@ -29,13 +29,9 @@
     }
 
     .button-container button {
-        width: 100%; 
-        max-width: 400px; 
+        width: 80%; 
+        max-width: 300px; 
         font-size: 1.2rem; 
-        padding: 16px 24px; 
+        padding: 12px 20px; 
     }
 }
-
-
-
-

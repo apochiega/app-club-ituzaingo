@@ -1,22 +1,14 @@
-body {
-  font-family: "Arial", sans-serif;
-  background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
 .login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100%;
+    font-family: "Arial", sans-serif;
+    background-color: #ffffff;
+    margin: 0;
   }
 
-  
   .login-form {
     display: flex;
     flex-direction: column;
@@ -28,42 +20,24 @@ body {
     height: 200px;
     
   }
-  
-  .login-card {
-    background-color: rgb(255, 255, 255);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgb(255, 255, 255);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .login-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #1b5e20;
-    margin-bottom: 5px;
-  }
-  
-  .google-button {
-    align-items: center;
-    justify-content: center;
-    background-color: #f44242;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+
+  .input-login{
+    width: 100%; /* Hace que el input ocupe todo el ancho del contenedor */
+    padding: 10px;
+    margin-bottom: 15px; /* Espacio entre los inputs */
+    border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .google-button:hover {
-    background-color: #e83535;
+    font-size: 16px;
   }
 
-  button {
+  .label-login{
+    align-self: flex-start; /* Alinea el texto a la izquierda */
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .login-button{
     width: 100%;
     background-color: #1b5e20;
     color: white;
@@ -75,24 +49,21 @@ body {
     margin-top: 10px;
   }
 
-  input {
-    width: 100%; /* Hace que el input ocupe todo el ancho del contenedor */
-    padding: 10px;
-    margin-bottom: 15px; /* Espacio entre los inputs */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+  .login-card {
+    background-color: #f4f4f4;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px #f4f4f4;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
   }
-
-  label {
-    align-self: flex-start; /* Alinea el texto a la izquierda */
-    font-size: 14px;
-    margin-bottom: 5px;
+  
+  .login-title {
+    font-size: 24px;
     font-weight: bold;
+    color: #1b5e20;
+    margin-bottom: 5px;
   }
-
-  .a{
-    text-align:justify;
-  }
-
+  
   

@@ -1,11 +1,21 @@
 .App {
-  text-align: center;
+  text-align: left;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

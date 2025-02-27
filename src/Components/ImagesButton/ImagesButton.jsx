@@ -1,7 +1,7 @@
 import React from "react";
-import "./imageButton.css";
+import "./ImagesButton.css";
 
-function ImageButton({ text, image, onClick }) {
+function ImagesButton({ text, image, onClick }) {
     return (
         <button className="container-image-text" onClick={onClick}>
             <img className="imagen-cancha" src={image} alt="cancha padel" />
@@ -10,4 +10,4 @@ function ImageButton({ text, image, onClick }) {
     );
 }
 
-export default ImageButton;
+export default ImagesButton;
