@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
-import "./HistoryTable.css"
+import { useState, useEffect } from "react";
+import apiService from "../../axiosApiService/axiosWrapper";
+import "./HistoryTable.css";
 
 const columns = [
   { id: "member_number", label: "N° Socio", minWidth: 100 },
@@ -7,46 +8,35 @@ const columns = [
   { id: "tickets", label: "Tickets", minWidth: 100, align: "right" },
   { id: "date", label: "Fecha", minWidth: 120 },
   { id: "description", label: "Descripción", minWidth: 200 },
-]
+];
 
 const HistoryTable = () => {
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [transactions, setTransactions] = useState([])
-  const [totalTransactions, setTotalTransactions] = useState(0)
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [transactions, setTransactions] = useState([]);
+  const [totalTransactions, setTotalTransactions] = useState(0);
 
   useEffect(() => {
-    fetchTransactions()
-  }, [page, rowsPerPage])
-
-  const fetchTransactions = () => {
-    // Simular una llamada a la API
-    const mockData = []
-    const start = page * rowsPerPage + 1
-    const end = start + rowsPerPage
-    for (let i = start; i < end; i++) {
-      mockData.push({
-        member_number: `000${i}`,
-        email: `user${i}@example.com`,
-        tickets: Math.floor(Math.random() * 20) + 1,
-        description: `Reserva ${Math.floor(Math.random() * 3) + 1} hora(s)`,
-        date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString(),
-      })
-    }
-    // Ordenar por fecha, la más reciente primero
-    mockData.sort((a, b) => new Date(b.date) - new Date(a.date))
-    setTransactions(mockData)
-    setTotalTransactions(100) // Simular un total de 100 transacciones
-  }
+    const transactionsData = async () => {
+      try {
+        const response = await apiService.getAllTransactions();
+        setTransactions(response.data);
+        setTotalTransactions(response.totalTransactions || response.data.length); // asegurao que el total se actualiza
+      } catch (error) {
+        console.error("Error obteniendo transacciones", error);
+      }
+    };
+    transactionsData();
+  }, [page, rowsPerPage]); 
 
   const handleChangePage = (newPage) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(Number.parseInt(event.target.value, 10))
-    setPage(0)
-  }
+    setRowsPerPage(Number.parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <div className="history-table-container">
@@ -55,20 +45,12 @@ const HistoryTable = () => {
           <table className="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th colSpan={2} className="title">
-                  Usuario
-                </th>
-                <th colSpan={3} className="title">
-                  Detalles de la transacción
-                </th>
+                <th colSpan={2} className="title">Usuario</th>
+                <th colSpan={3} className="title">Detalles de la transacción</th>
               </tr>
               <tr>
                 {columns.map((column) => (
-                  <th
-                    key={column.id}
-                    style={{ minWidth: column.minWidth }}
-                    className={column.align === "right" ? "text-right" : ""}
-                  >
+                  <th key={column.id} style={{ minWidth: column.minWidth }} className={column.align === "right" ? "text-right" : ""}>
                     {column.label}
                   </th>
                 ))}
@@ -78,12 +60,12 @@ const HistoryTable = () => {
               {transactions.map((row) => (
                 <tr key={row.member_number}>
                   {columns.map((column) => {
-                    const value = row[column.id]
+                    const value = row[column.id];
                     return (
                       <td key={column.id} className={column.align === "right" ? "text-right" : ""}>
                         {value}
                       </td>
-                    )
+                    );
                   })}
                 </tr>
               ))}
@@ -123,8 +105,7 @@ const HistoryTable = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HistoryTable
-
+export default HistoryTable;

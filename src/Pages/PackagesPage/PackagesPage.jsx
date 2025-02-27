@@ -73,7 +73,7 @@ function PackagesPage() {
   return (
     <div>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <h1 className="title-package" style={{ marginBottom: "20px" }}>Administrar paquetes de tickets</h1>
+        <h1 className="fs-2 fw-bold">Administrar paquetes de tickets</h1>
       </Box>
       <Box display="flex" justifyContent="flex-end" mb={2}>
         <Button 
