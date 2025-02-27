@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Box, TextField, Button } from "@mui/material";
+import apiService from "../../axiosApiService/axiosWrapper"
 
 function CreatePackageModal({ open, onClose, onCreate }) {
   const initialState = {
@@ -10,8 +11,20 @@ function CreatePackageModal({ open, onClose, onCreate }) {
     ticket_quantity: "",
   };
 
+  const [user, setUser] = useState(null);
   const [newCoupon, setNewCoupon] = useState(initialState);
+
+  const [newPackage, setNewPackage] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    
+      setUser( sessionStorage.getItem("accessToken", user?.uid) );
+      console.log(sessionStorage.getItem("accessToken", user?.uid));
+      console.log('mica');
+    
+  }, []);
 
   useEffect(() => {
     if (open) {
@@ -30,14 +43,37 @@ function CreatePackageModal({ open, onClose, onCreate }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleCreate = () => {
+  // const handleCreate = () => {
+  //   if (!validateFields()) return;
+  //   onCreate({
+  //     ...newCoupon,
+  //     price: parseFloat(newCoupon.price) || 0,
+  //     ticket_quantity: parseInt(newCoupon.ticket_quantity) || 0,
+  //   });
+  //   onClose();
+  // };
+  const handleCreate = async () => {
     if (!validateFields()) return;
-    onCreate({
-      ...newCoupon,
-      price: parseFloat(newCoupon.price) || 0,
-      ticket_quantity: parseInt(newCoupon.ticket_quantity) || 0,
-    });
-    onClose();
+
+    setLoading(true);
+    
+    try {
+      const response = await apiService.createPackage({
+        title: newPackage.title,
+        description: newPackage.description,
+        price: parseFloat(newPackage.price),
+        ticket_quantity: parseInt(newPackage.ticket_quantity),
+        firebase_uid: user
+      });
+
+      onCreate(response.data); // Agregar el nuevo paquete a la lista
+      onClose();
+    } catch (error) {
+      console.error("Error al crear el paquete:", error);
+      alert("Hubo un error al crear el paquete. Inténtalo de nuevo.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleNumberChange = (field, value) => {

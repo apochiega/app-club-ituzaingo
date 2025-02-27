@@ -2,9 +2,9 @@ import React from "react";
 import Header from "../../Components/Header/Header";
 import { useState } from "react";
 import { useEffect } from "react";
-import UserTable from "../../Components/Tables/UserTable";
+import UserTable from "../../Components/Tables/userTable";
 import GreenButton from "../../Components/greenButton/greenButton";
-import "./UserPage.css";
+import "./userPage.css";
 import axios from 'axios';
 
 

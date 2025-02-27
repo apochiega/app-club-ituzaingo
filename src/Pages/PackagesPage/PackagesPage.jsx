@@ -1,24 +1,35 @@
 import "./PackagesPage.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import CollapsibleTable from "../../Components/Tables/CollapsibleTable";
 import EditPackageModal from "../../Components/Modal/EditPackageModal";
 import CreatePackageModal from "../../Components/Modal/CreatePackageModal";
 import DeleteConfirmationModal from "../../Components/Modal/DeletePackageModal";
 import { Button, Box } from "@mui/material";
+import apiService from "../../axiosApiService/axiosWrapper"
+import { Typography } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 
 function PackagesPage() {
-  const [coupons, setCoupons] = useState({
-    message: "success",
-    data: [
-      { id: 1, description: "ticketera 8 tickets", title: "8 tickets", price: 3200, ticket_quantity: 8 },
-      { id: 2, description: "ticketera 16 tickets", title: "16 tickets", price: 5000, ticket_quantity: 16 },
-    ],
-  });
-  
+  const [coupons, setCoupons] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [currentCoupon, setCurrentCoupon] = useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); 
+
+  useEffect(() => {
+    const packageData = async () => {
+      try {
+        const response = await apiService.getAllPackages();
+        setCoupons(response.data);
+      } catch (error) {
+        console.error("Error al obtener los paquetes:", error);
+      } finally {
+        setIsLoading(false); 
+      }
+    };
+    packageData();
+  }, []);
 
   const handleDeleteRequest = (coupon) => {
     setCurrentCoupon(coupon);
@@ -67,6 +78,7 @@ function PackagesPage() {
       ...prevCoupons,
       data: [...prevCoupons.data, newCoupon],
     }));
+
     handleCloseCreate();
   };
 
@@ -90,12 +102,19 @@ function PackagesPage() {
         </Button>
       </Box>
       <div className="table-container">
-        <CollapsibleTable
-          data={coupons.data}
-          keysToShow={["description", "title", "price", "ticket_quantity"]}
-          onEdit={handleOpenEdit}
-          onDelete={handleDeleteRequest}
-        />
+        {isLoading ? (
+          <Box display="flex" justifyContent="center" alignItems="center" height="30vh">
+            <CircularProgress sx={{ fontSize: 50, color: "#255E13" }} />
+            <Typography variant="h6" color="#255E13" > Cargando paquetes... </Typography>
+          </Box>
+        ) : (
+          <CollapsibleTable
+            data={coupons}
+            keysToShow={["description", "title", "price", "ticket_quantity"]}
+            onEdit={setCurrentCoupon}
+            onDelete={setCurrentCoupon}
+          />
+        )}
       </div>
       
       <EditPackageModal 

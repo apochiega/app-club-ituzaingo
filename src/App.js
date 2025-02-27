@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { auth } from "./services/firebase.js";
 import HomePage from "./Pages/HomePage/HomePage";
-import UserPage from "./Pages/UserPage/UserPage";
+import UserPage from "./Pages/UserPage/userPage.jsx";
 import PackagesPage from "./Pages/PackagesPage/PackagesPage";
 import HistoryPage from "./Pages/HistoryPage/HistoryPage";
 import Header from "./Components/Header/Header";
@@ -21,7 +21,8 @@ function App() {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             setUser(user);
             sessionStorage.setItem("accessToken", user?.accessToken);
-            // console.log(user?.accessToken);
+            sessionStorage.setItem("uid", user?.uid);
+            console.log(user?.accessToken);
             if (user) {
                 setRole(role);
             }
