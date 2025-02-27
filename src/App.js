@@ -20,7 +20,8 @@ function App() {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             setUser(user);
-            sessionStorage.setItem("authToken", user);
+            sessionStorage.setItem("accessToken", user?.accessToken);
+            // console.log(user?.accessToken);
             if (user) {
                 setRole(role);
             }
@@ -38,20 +39,20 @@ function App() {
                   <Row>
                       <Col >
                       <Routes>
-                        {!user ? (
-                              <Route path="/*" element={<Navigate to="/login" />} />
-                          ) : (
+                          <Route path="/login" element={!user ? <LogIn /> : <Navigate to="/" />} />
+                          {user ? (
                               <>
                                   <Route path="/" element={<HomePage />} />
                                   <Route path="/HomePage" element={<HomePage />} />
                                   <Route path="/UserPage" element={<UserPage />} />
                                   <Route path="/PackagePage" element={<PackagesPage />} />
                                   <Route path="/HistoryPage" element={<HistoryPage />} />
-                                  <Route path="/login" element={<Navigate to="/" />} />
                               </>
+                          ) : (
+                              <Route path="/*" element={<Navigate to="/login" />} />
                           )}
-                          <Route path="/login" element={<LogIn />} />
-                          </Routes>
+                      </Routes>
+
                       </Col>
                   </Row>
           </div>

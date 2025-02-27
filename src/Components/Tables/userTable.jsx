@@ -9,12 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
-import { Edit, LocalActivity } from "@mui/icons-material";
+import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
-import './userTable.css';
+import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
-import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
-import axios from 'axios';
+
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
@@ -43,13 +42,27 @@ export default function UserTable() {
         usersData()
     }, []);
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+        try {
+            const response = await apiService.users.getAll();
+            setUsers(response.data); 
+        } catch (error) {
+            console.error("Error al obtener usuarios:", error);
+        }
+    };
+
+    fetchUsers();
+  }, []);
+
+
   const onEdit = (item) => {
     console.log("Usuario seleccionado para edición:", item);
     setSelectedUser(item);
     setOpenModal(true);
   };
 
-  const handleSave = (member_number, tickets, description) => { //member-number????
+  const handleSave = (member_number, partidos, description) => { //member-number????
     setUsers((prev) => ({
       ...prev,
       data: prev.map((user) =>
@@ -81,8 +94,8 @@ export default function UserTable() {
     handleDecrement(userToDecrement);
     setOpenConfirmModal(false);
   };
-
-  const rows = users.data.map((item) => ({
+  
+  const rows = users.map((item) => ({ 
     ...item,
     edit: (
       <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
