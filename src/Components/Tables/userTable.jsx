@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import apiService from "../../axiosApiService/axiosWrapper"
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,6 +14,7 @@ import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModa
 import './userTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 import DecreaseMatchCountButton from '../DecreaseMatchCountButton/DecreaseMatchCountButton';
+import axios from 'axios';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
@@ -31,17 +33,15 @@ export default function UserTable() {
   const [userToDecrement, setUserToDecrement] = useState(null);
 
 
-  const [coupons, setCoupons] = useState({
-    message: 'success',
-    data: [
-      { name: 'micaela procofio', telefono: '098123456', member_number: 1, partidos: 7 },
-      { name: 'juliana hernandez', telefono: '098823451', member_number: 2, partidos: 16 },
-    ],
-  });
+  const [users,setUsers] = useState([]);
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(()=>{
+      const usersData= async()=>{
+          const response= await apiService.getAllUsers();
+          setUsers(response.data)
+        }
+        usersData()
+    }, []);
 
   const onEdit = (item) => {
     console.log("Usuario seleccionado para edición:", item);
@@ -49,10 +49,10 @@ export default function UserTable() {
     setOpenModal(true);
   };
 
-  const handleSave = (member_number, partidos, description) => {
-    setCoupons((prev) => ({
+  const handleSave = (member_number, tickets, description) => { //member-number????
+    setUsers((prev) => ({
       ...prev,
-      data: prev.data.map((user) =>
+      data: prev.map((user) =>
         user.member_number === member_number
           ? { ...user, partidos }
           : user
