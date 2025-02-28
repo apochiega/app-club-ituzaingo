@@ -45,8 +45,8 @@ const HistoryTable = () => {
           <table className="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th colSpan={2} className="title">Usuario</th>
-                <th colSpan={3} className="title">Detalles de la transacción</th>
+                <th colSpan={2} className="title" style={{fontSize: '1em'}}>Usuario</th>
+                <th colSpan={3} className="title" style={{fontSize: '1em'}}>Detalles de la transacción</th>
               </tr>
               <tr>
                 {columns.map((column) => (
