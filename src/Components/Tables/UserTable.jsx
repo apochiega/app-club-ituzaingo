@@ -13,7 +13,6 @@ import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
 import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
-import './userTable.css';
 
 
 const columns = [
