@@ -17,9 +17,10 @@ import EditUserModal from '../EditUserModal/EditUserModal';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
+  { id: 'email', label: 'Email', minWidth: 170, align: 'left' },
   { id: 'telefono', label: 'Télefono', minWidth: 170, align: 'left' },
-  { id: 'member_number', label: 'Número de Socio', minWidth: 100, align: 'left' },
-  { id: 'partidos', label: 'Partidos', minWidth: 100, align: 'left' },
+  { id: 'user_id', label: 'Número de Socio', minWidth: 100, align: 'left' },
+  { id: 'tickets', label: 'Partidos', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
 ];
 
@@ -37,6 +38,7 @@ export default function UserTable() {
   useEffect(()=>{
       const usersData= async()=>{
           const response= await apiService.getAllUsers();
+          console.log("Datos de la API:", response.data);
           setUsers(response.data)
         }
         usersData()
