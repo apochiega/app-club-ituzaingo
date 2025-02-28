@@ -27,49 +27,68 @@ export default function UserTable() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [userToDecrement, setUserToDecrement] = useState(null);
-
-
   const [users,setUsers] = useState([]);
 
   useEffect(()=>{
     const usersData= async()=>{
-        const response= await apiService.getAllUsers();
-        setUsers(response.data)
-      }
-      usersData()
-    }, []);
+      const response= await apiService.getAllUsers();
+      setUsers(response.data)
+    }
+    usersData()
+  }, []);
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //         const response = await apiService.users.getAll();
-  //         setUsers(response.data); 
-  //     } catch (error) {
-  //         console.error("Error al obtener usuarios:", error);
-  //     }
-  //   };
-
-  //   fetchUsers();
-  // }, []);
-
-
-  const handleDecrement = (member_number) => {
-    setUsers((prev) => ({
-      ...prev,
-      data: prev.data.map((user) =>
-        user.member_number === member_number && user.partidos > 0
-          ? { ...user, partidos: user.partidos - 1 }
-          : user
-      ),
-    }));
+  const handleDecrement = async (user_id) => {
+    let newTickets = null;
+  
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => {
+        if (user.user_id === user_id) 
+        {
+          if (user.tickets === 0) 
+          {
+            alert("No quedan tickets disponibles para este usuario.");
+            return user;
+          }
+          else
+          {
+            newTickets = user.tickets - 1; 
+            return { ...user, tickets: newTickets };
+          }
+        }
+        else
+        {
+          return user;
+        }
+      })
+    );
+  
+    if (newTickets === null) return; 
+    
+    try {
+      const userData = {
+        tickets: 1, 
+        date: new Date(),
+        description: "Se ha restado un ticket al usuario."
+      };
+  
+      await apiService.removeUserTickets(user_id, userData);
+  
+      console.log("Base de datos actualizada con éxito.");
+    } 
+    catch (error) {
+      console.error("Error al actualizar la base de datos:", error);
+      alert("Hubo un error al actualizar los tickets en la base de datos.");
+    }
   };
+  
 
-  const handleOpenConfirmModal = (member_number) => {
-    setUserToDecrement(member_number);
+  const handleOpenConfirmModal = (user_id) => {
+    setUserToDecrement(user_id);
     setOpenConfirmModal(true);
   };
 
   const handleConfirmDecrement = () => {
+    console.log('confirm decrement', userToDecrement);
     handleDecrement(userToDecrement);
     setOpenConfirmModal(false);
   };
@@ -78,7 +97,7 @@ export default function UserTable() {
     ...item,
     edit: (
       <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
-        <IconButton  onClick={() => handleOpenConfirmModal(item.member_number)}  color="primary">
+        <IconButton  onClick={() => handleOpenConfirmModal(item.user_id)}  color="primary">
           <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
         </IconButton>
       </div>
