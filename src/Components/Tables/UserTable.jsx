@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import apiService from "../../axiosApiService/axiosWrapper"
+import apiService from "../../services/axiosWrapper"
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -42,20 +42,6 @@ export default function UserTable() {
         }
         usersData()
     }, []);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-        try {
-            const response = await apiService.users.getAll();
-            setUsers(response.data); 
-        } catch (error) {
-            console.error("Error al obtener usuarios:", error);
-        }
-    };
-
-    fetchUsers();
-  }, []);
-
 
   const onEdit = (item) => {
     console.log("Usuario seleccionado para edición:", item);
