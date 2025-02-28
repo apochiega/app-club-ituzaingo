@@ -11,15 +11,15 @@ import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
-import './userTable.css';
+import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
-  { id: 'telefono', label: 'Télefono', minWidth: 170, align: 'left' },
-  { id: 'member_number', label: 'Número de Socio', minWidth: 100, align: 'left' },
-  { id: 'partidos', label: 'Partidos', minWidth: 100, align: 'left' },
+  { id: 'email', label: 'Email', minWidth: 170, align: 'left' },
+  { id: 'user_id', label: 'Número de Socio', minWidth: 100, align: 'left' },
+  { id: 'tickets', label: 'Partidos', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
 ];
 
@@ -42,18 +42,6 @@ export default function UserTable() {
         usersData()
     }, []);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-        try {
-            const response = await apiService.users.getAll();
-            setUsers(response.data); 
-        } catch (error) {
-            console.error("Error al obtener usuarios:", error);
-        }
-    };
-
-    fetchUsers();
-  }, []);
 
 
   const onEdit = (item) => {
@@ -162,12 +150,7 @@ export default function UserTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <EditUserModal
-        open={openModal}
-        handleClose={() => setOpenModal(false)}
-        user={selectedUser}
-        onSave={handleSave}
-      />
+      
       <ConfirmDecrementModal
         open={openConfirmModal}
         handleClose={() => setOpenConfirmModal(false)}
