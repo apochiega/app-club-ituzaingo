@@ -9,6 +9,7 @@ api.interceptors.request.use( //modifico la request antes que se envie al servid
         const token = sessionStorage.getItem("accessToken"); // obtengo token almacenado
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
+            config.headers["Content-Type"] = 'application/json';
         }
         return config;
 });
@@ -19,6 +20,7 @@ const apiService = {
     getAllUsers: () => api.get("/user/getUsers"),
     getUserById: (userId)=> api.get(`/user/getUserById/${userId}`),
     editUserTickets: (userId, newTicketsData) => api.put(`/users/AddTickets/${userId}`, newTicketsData), //anadir y eliminar tickets o actualizar los tickets?
+    createUser: (userData) => api.post("/user/createLoadUser", userData),
 
     //Llamadas de Paquetes
     createPackage: (packageData) => api.post("/package/createPackage", packageData),

@@ -23,6 +23,7 @@ function App() {
             sessionStorage.setItem("accessToken", user?.accessToken);
             sessionStorage.setItem("uid", user?.uid);
             console.log(user?.accessToken);
+            console.log(user?.uid);
             if (user) {
                 setRole(role);
             }

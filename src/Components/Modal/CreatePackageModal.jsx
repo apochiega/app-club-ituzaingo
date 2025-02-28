@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { Modal, Box, TextField, Button } from "@mui/material";
 import apiService from "../../axiosApiService/axiosWrapper"
 
@@ -11,63 +11,55 @@ function CreatePackageModal({ open, onClose, onCreate }) {
     ticket_quantity: "",
   };
 
-  const [user, setUser] = useState(null);
-  const [newCoupon, setNewCoupon] = useState(initialState);
+  const [user, setUser] = useState([]);
+  // const [newCoupon, setNewCoupon] = useState(initialState);
 
   const [newPackage, setNewPackage] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    
-      setUser( sessionStorage.getItem("accessToken", user?.uid) );
-      console.log(sessionStorage.getItem("accessToken", user?.uid));
-      console.log('mica');
-    
+      setUser(sessionStorage.getItem("uid") );
   }, []);
 
   useEffect(() => {
     if (open) {
-      setNewCoupon(initialState);
+      setNewPackage(initialState);
       setErrors({});
     }
   }, [open]);
 
   const validateFields = () => {
     let newErrors = {};
-    if (!newCoupon.title.trim()) newErrors.title = "El título es obligatorio";
-    if (!newCoupon.description.trim()) newErrors.description = "La descripción es obligatoria";
-    if (!newCoupon.price || isNaN(newCoupon.price) || newCoupon.price <= 0) newErrors.price = "El precio debe ser un número mayor a 0";
-    if (!newCoupon.ticket_quantity || isNaN(newCoupon.ticket_quantity) || newCoupon.ticket_quantity <= 0) newErrors.ticket_quantity = "La cantidad de tickets debe ser un número mayor a 0";
+    if (!newPackage.title.trim()) newErrors.title = "El título es obligatorio";
+    if (!newPackage.description.trim()) newErrors.description = "La descripción es obligatoria";
+    if (!newPackage.price || isNaN(newPackage.price) || newPackage.price <= 0)
+      newErrors.price = "El precio debe ser un número mayor a 0";
+    if (!newPackage.ticket_quantity || isNaN(newPackage.ticket_quantity) || newPackage.ticket_quantity <= 0)
+      newErrors.ticket_quantity = "La cantidad de tickets debe ser un número mayor a 0";
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // const handleCreate = () => {
-  //   if (!validateFields()) return;
-  //   onCreate({
-  //     ...newCoupon,
-  //     price: parseFloat(newCoupon.price) || 0,
-  //     ticket_quantity: parseInt(newCoupon.ticket_quantity) || 0,
-  //   });
-  //   onClose();
-  // };
   const handleCreate = async () => {
     if (!validateFields()) return;
 
     setLoading(true);
     
     try {
-      const response = await apiService.createPackage({
+
+      const packageData = {
         title: newPackage.title,
         description: newPackage.description,
         price: parseFloat(newPackage.price),
         ticket_quantity: parseInt(newPackage.ticket_quantity),
-        firebase_uid: user
-      });
+        firebase_uid: user}
 
-      onCreate(response.data); // Agregar el nuevo paquete a la lista
+      // onCreate(response.data); // Agregar el nuevo paquete a la lista
+      onCreate(packageData);
       onClose();
+
     } catch (error) {
       console.error("Error al crear el paquete:", error);
       alert("Hubo un error al crear el paquete. Inténtalo de nuevo.");
@@ -78,7 +70,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
 
   const handleNumberChange = (field, value) => {
     if (/^\d*$/.test(value)) {
-      setNewCoupon({ ...newCoupon, [field]: value });
+      setNewPackage({ ...newPackage, [field]: value });
     }
   };
 
@@ -104,8 +96,8 @@ function CreatePackageModal({ open, onClose, onCreate }) {
         <TextField
           label="Título"
           fullWidth
-          value={newCoupon.title}
-          onChange={(e) => setNewCoupon({ ...newCoupon, title: e.target.value })}
+          value={setNewPackage.title}
+          onChange={(e) => setNewPackage({ ...newPackage, title: e.target.value })}
           margin="normal"
           error={!!errors.title}
           helperText={errors.title}
@@ -113,8 +105,8 @@ function CreatePackageModal({ open, onClose, onCreate }) {
         <TextField
           label="Descripción"
           fullWidth
-          value={newCoupon.description}
-          onChange={(e) => setNewCoupon({ ...newCoupon, description: e.target.value })}
+          value={newPackage.description}
+          onChange={(e) => setNewPackage({ ...newPackage, description: e.target.value })}
           margin="normal"
           error={!!errors.description}
           helperText={errors.description}
@@ -123,7 +115,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
           label="Precio"
           fullWidth
           type="text"
-          value={newCoupon.price}
+          value={newPackage.price}
           onChange={(e) => handleNumberChange("price", e.target.value)}
           margin="normal"
           error={!!errors.price}
@@ -133,7 +125,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
           label="Tickets"
           fullWidth
           type="text"
-          value={newCoupon.ticket_quantity}
+          value={newPackage.ticket_quantity}
           onChange={(e) => handleNumberChange("ticket_quantity", e.target.value)}
           margin="normal"
           error={!!errors.ticket_quantity}
