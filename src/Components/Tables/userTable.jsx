@@ -16,6 +16,7 @@ import './userTable.css';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
+  { id: 'phone_number', label: 'Número de Celular', minWidth: 170, align: 'left' },
   { id: 'email', label: 'Email', minWidth: 170, align: 'left' },
   { id: 'user_id', label: 'Número de Socio', minWidth: 100, align: 'left' },
   { id: 'tickets', label: 'Partidos', minWidth: 100, align: 'left' },
@@ -67,7 +68,7 @@ export default function UserTable() {
     try {
       const userData = {
         tickets: 1, 
-        date: new Date(),
+        // date: "2021-10-10",
         description: "Se ha restado un ticket al usuario."
       };
   
