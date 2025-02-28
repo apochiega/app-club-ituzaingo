@@ -2,6 +2,8 @@
     font-size: 40px;
     font-weight: bold;
     margin: 20px 0;
+    display: flex;
+    justify-content: flex
 }
 
 .button-container {

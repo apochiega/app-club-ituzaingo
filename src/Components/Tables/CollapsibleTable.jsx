@@ -1,6 +1,7 @@
 import React from "react";
 import { Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,IconButton,Collapse,Box,Typography,useMediaQuery} from "@mui/material";
 import { Edit, Delete, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import { Info as InfoIcon } from "@mui/icons-material";
 
 const columnTitles = {
   title: "Título",
@@ -76,7 +77,19 @@ const CollapsibleTable = ({ data, keysToShow, onDelete, onEdit, isHistory }) => 
   const isMobile = useMediaQuery("(max-width:768px)"); // Detecta si es pantalla móvil
 
   if (!data || data.length === 0) {
-    return <p>No hay datos disponibles</p>;
+    return (
+      <Box 
+        display="flex" 
+        flexDirection="column" 
+        justifyContent="center" 
+        alignItems="center" 
+        height="20vh"
+        className="no-data-container"
+      >
+        <InfoIcon className="no-data-icon" />
+        <Typography className="no-data-text">No hay paquetes disponibles</Typography>
+      </Box>
+    );
   }
 
   return (
