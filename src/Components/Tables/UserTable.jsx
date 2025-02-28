@@ -26,8 +26,6 @@ const columns = [
 export default function UserTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [userToDecrement, setUserToDecrement] = useState(null);
 
@@ -89,7 +87,7 @@ export default function UserTable() {
         <IconButton  onClick={() => handleOpenConfirmModal(item.member_number)}  color="primary">
           <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
         </IconButton>
-        </div>
+      </div>
     ),
   }));
   
@@ -148,12 +146,6 @@ export default function UserTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-      <EditUserModal
-        open={openModal}
-        handleClose={() => setOpenModal(false)}
-        user={selectedUser}
-        onSave={handleSave}
       />
       <ConfirmDecrementModal
         open={openConfirmModal}
