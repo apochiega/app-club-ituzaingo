@@ -12,22 +12,19 @@ import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
 import './userTable.css';
-import EditUserModal from '../EditUserModal/EditUserModal';
 
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
-  { id: 'telefono', label: 'Télefono', minWidth: 170, align: 'left' },
-  { id: 'member_number', label: 'Número de Socio', minWidth: 100, align: 'left' },
-  { id: 'partidos', label: 'Partidos', minWidth: 100, align: 'left' },
+  { id: 'email', label: 'Email', minWidth: 170, align: 'left' },
+  { id: 'user_id', label: 'Número de Socio', minWidth: 100, align: 'left' },
+  { id: 'tickets', label: 'Partidos', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
 ];
 
 export default function UserTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [userToDecrement, setUserToDecrement] = useState(null);
 
@@ -35,44 +32,26 @@ export default function UserTable() {
   const [users,setUsers] = useState([]);
 
   useEffect(()=>{
-      const usersData= async()=>{
-          const response= await apiService.getAllUsers();
-          setUsers(response.data)
-        }
-        usersData()
+    const usersData= async()=>{
+        const response= await apiService.getAllUsers();
+        setUsers(response.data)
+      }
+      usersData()
     }, []);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-        try {
-            const response = await apiService.users.getAll();
-            setUsers(response.data); 
-        } catch (error) {
-            console.error("Error al obtener usuarios:", error);
-        }
-    };
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //         const response = await apiService.users.getAll();
+  //         setUsers(response.data); 
+  //     } catch (error) {
+  //         console.error("Error al obtener usuarios:", error);
+  //     }
+  //   };
 
-    fetchUsers();
-  }, []);
+  //   fetchUsers();
+  // }, []);
 
-
-  const onEdit = (item) => {
-    console.log("Usuario seleccionado para edición:", item);
-    setSelectedUser(item);
-    setOpenModal(true);
-  };
-
-  const handleSave = (member_number, partidos, description) => { //member-number????
-    setUsers((prev) => ({
-      ...prev,
-      data: prev.map((user) =>
-        user.member_number === member_number
-          ? { ...user, partidos }
-          : user
-      ),
-    }));
-    console.log(`Guardando en BD: Usuario ${member_number}, Partidos: ${partidos}, Descripción: "${description}"`);
-  };
 
   const handleDecrement = (member_number) => {
     setUsers((prev) => ({
@@ -102,7 +81,7 @@ export default function UserTable() {
         <IconButton  onClick={() => handleOpenConfirmModal(item.member_number)}  color="primary">
           <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
         </IconButton>
-        </div>
+      </div>
     ),
   }));
   
@@ -161,12 +140,6 @@ export default function UserTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-      <EditUserModal
-        open={openModal}
-        handleClose={() => setOpenModal(false)}
-        user={selectedUser}
-        onSave={handleSave}
       />
       <ConfirmDecrementModal
         open={openConfirmModal}
