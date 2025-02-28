@@ -18,7 +18,6 @@ import EditUserModal from '../EditUserModal/EditUserModal';
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
   { id: 'email', label: 'Email', minWidth: 170, align: 'left' },
-  { id: 'telefono', label: 'Télefono', minWidth: 170, align: 'left' },
   { id: 'user_id', label: 'Número de Socio', minWidth: 100, align: 'left' },
   { id: 'tickets', label: 'Partidos', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
