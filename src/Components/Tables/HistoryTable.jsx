@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import apiService from "../../axiosApiService/axiosWrapper";
+import apiService from "../../services/axiosWrapper";
 import "./HistoryTable.css";
 
 const columns = [
