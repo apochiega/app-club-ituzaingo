@@ -20,7 +20,7 @@ const apiService = {
     getAllUsers: () => api.get("/user/getUsers"),
     getUserById: (userId)=> api.get(`/user/getUserById/${userId}`),
     editUserTickets: (userId, newTicketsData) => api.put(`/users/AddTickets/${userId}`, newTicketsData), //anadir y eliminar tickets o actualizar los tickets?
-    createUser: (userData) => api.post("/user/createLoadUser", userData),
+    logUser: () => api.post("/user/logUser"),
 
     //Llamadas de Paquetes
     createPackage: (packageData) => api.post("/package/createPackage", packageData),

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import UserTable from "../../Components/Tables/userTable";
 import GreenButton from "../../Components/greenButton/greenButton";
-import "./userPage.css";
+import "./UserPage.css";
 import axios from 'axios';
 
 
