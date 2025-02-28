@@ -28,8 +28,6 @@ export default function UserTable() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [userToDecrement, setUserToDecrement] = useState(null);
-
-
   const [users,setUsers] = useState([]);
 
   useEffect(()=>{
@@ -69,13 +67,15 @@ export default function UserTable() {
       ),
     }));
   };
+  
 
-  const handleOpenConfirmModal = (member_number) => {
-    setUserToDecrement(member_number);
+  const handleOpenConfirmModal = (user_id) => {
+    setUserToDecrement(user_id);
     setOpenConfirmModal(true);
   };
 
   const handleConfirmDecrement = () => {
+    console.log('confirm decrement', userToDecrement);
     handleDecrement(userToDecrement);
     setOpenConfirmModal(false);
   };
@@ -84,7 +84,7 @@ export default function UserTable() {
     ...item,
     edit: (
       <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
-        <IconButton  onClick={() => handleOpenConfirmModal(item.member_number)}  color="primary">
+        <IconButton  onClick={() => handleOpenConfirmModal(item.user_id)}  color="primary">
           <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
         </IconButton>
       </div>
