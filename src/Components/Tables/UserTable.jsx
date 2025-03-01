@@ -48,7 +48,7 @@ export default function UserTable() {
         {
           if (user.tickets === 0) 
           {
-            alert("No quedan tickets disponibles para este usuario.");
+            alert("No quedan partidos disponibles para este usuario.");
             return user;
           }
           else
@@ -70,16 +70,16 @@ export default function UserTable() {
       const userData = {
         tickets: 1, 
         // date: "2021-10-10",
-        description: "Se ha restado un ticket al usuario."
+        description: "Se ha restado un partido al usuario."
       };
   
       await apiService.removeUserTickets(user_id, userData);
   
-      console.log("Base de datos actualizada con éxito.");
+      // console.log("Base de datos actualizada con éxito.");
     } 
     catch (error) {
       console.error("Error al actualizar la base de datos:", error);
-      alert("Hubo un error al actualizar los tickets en la base de datos.");
+      alert("Hubo un error al actualizar los partidos en la base de datos.");
     }
   };
   
@@ -90,7 +90,7 @@ export default function UserTable() {
   };
 
   const handleConfirmDecrement = () => {
-    console.log('confirm decrement', userToDecrement);
+    // console.log('confirm decrement', userToDecrement);
     handleDecrement(userToDecrement);
     setOpenConfirmModal(false);
   };

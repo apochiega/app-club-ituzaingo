@@ -84,7 +84,7 @@ const LogIn = () => {
                 navigate("/");
             }
         } catch (error) {
-            console.log(error.message);
+            // console.log(error.message);
             setError("Las credenciales ingresadas son incorrectas. Por favor, verificá tus datos e intentá nuevamente.");
         }
     };
