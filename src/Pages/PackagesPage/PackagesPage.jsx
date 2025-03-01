@@ -99,7 +99,7 @@ function PackagesPage() {
         <div>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <h1 className="title-package" style={{ marginBottom: "20px" }}>
-                    Administrar paquetes de tickets
+                    Administrar paquetes 
                 </h1>
             </Box>
 

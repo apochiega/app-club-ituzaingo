@@ -48,13 +48,13 @@ export const getUserRole = async (uid) => {
     try {
         const userDoc = await getDoc(doc(db, "users", uid)); 
         if (userDoc.exists()) {
-            console.log("Rol obtenido:", userDoc.data().role);
+            // console.log("Rol obtenido:", userDoc.data().role);
             return userDoc.data().role; // "admin" o "user"
         }
-        console.log("No se encontró el documento del usuario en Firestore.");
+        // console.log("No se encontró el documento del usuario en Firestore.");
         return null;
     } catch (error) {
-        console.error("Error al obtener el rol del usuario:", error);
+        // console.error("Error al obtener el rol del usuario:", error);
         return null;
     }
 };

@@ -89,7 +89,7 @@ const CollapsibleTable = ({ data, keysToShow, onDelete, onEdit, isHistory }) => 
         textAlign="center"
       >
         <InfoIcon sx={{ fontSize: 50, color: "#255E13" }} />
-        <Typography variant="h6" color="#255E13" >No hay paquetes de tickets disponibles</Typography>
+        <Typography variant="h6" color="#255E13" >No hay paquetes disponibles</Typography>
       </Box>
     );
   }

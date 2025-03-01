@@ -39,7 +39,7 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
           gap: 2,
         }}
       >
-        <h2>Editar Ticket</h2>
+        <h2>Editar Paquete</h2>
         <TextField
           label="Título"
           fullWidth
@@ -67,7 +67,7 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
           min="0"
         />
         <TextField
-          label="Tickets"
+          label="Cantidad de Partidos"
           fullWidth
           type="number"
           value={updatedCoupon.ticket_quantity}

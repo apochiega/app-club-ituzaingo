@@ -36,7 +36,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
     if (!newPackage.price || isNaN(newPackage.price) || newPackage.price <= 0)
       newErrors.price = "El precio debe ser un número mayor a 0";
     if (!newPackage.ticket_quantity || isNaN(newPackage.ticket_quantity) || newPackage.ticket_quantity <= 0)
-      newErrors.ticket_quantity = "La cantidad de tickets debe ser un número mayor a 0";
+      newErrors.ticket_quantity = "La cantidad de partidos debe ser un número mayor a 0";
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -92,7 +92,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
           gap: 2,
         }}
       >
-        <h2>Crear Nuevo Ticket</h2>
+        <h2>Crear Paquete</h2>
         <TextField
           label="Título"
           fullWidth
@@ -122,7 +122,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
           helperText={errors.price}
         />
         <TextField
-          label="Tickets"
+          label="Cantidad de Partidos"
           fullWidth
           type="text"
           value={newPackage.ticket_quantity}

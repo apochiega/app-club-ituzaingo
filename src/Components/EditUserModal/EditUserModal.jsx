@@ -8,8 +8,6 @@ const EditUserModal = ({ open, handleClose, user, onSave }) => {
   const [partidos, setPartido] = useState(0);
   const [description, setDescription] = useState("");
 
-  // console.log('tickets', tickets);
-
   const handleSave = () => {
     onSave(user.member_number, partidos, description);
     handleClose();
