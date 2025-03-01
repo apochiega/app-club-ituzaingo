@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
-import './UserTable.css';
+import './userTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 
 
