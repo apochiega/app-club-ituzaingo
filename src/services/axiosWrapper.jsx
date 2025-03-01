@@ -10,6 +10,7 @@ api.interceptors.request.use( //modifico la request antes que se envie al servid
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
             config.headers["Content-Type"] = 'application/json';
+
         }
         return config;
 });
@@ -21,7 +22,6 @@ const apiService = {
     getUserById: (userId)=> api.get(`/user/getUserById/${userId}`),
     logUser: () => api.post("/user/logUser"),
     removeUserTickets: (userId, newTicketsData) => api.post(`/user/removeTickets/${userId}`, newTicketsData), //anadir y eliminar tickets o actualizar los tickets?
-    logUser: () => api.post("/user/logUser"),
 
     //Llamadas de Paquetes
     createPackage: (packageData) => api.post("/package/createPackage", packageData),
