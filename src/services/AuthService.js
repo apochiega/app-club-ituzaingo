@@ -16,7 +16,7 @@ import { getDoc, doc, setDoc } from "firebase/firestore";
 //             // Si el usuario no existe, se crea con rol de admin
 //             await setDoc(userRef, {
 //                 email: user.email,
-//                 role: "admin", // Se asigna el rol de administrador
+//                 role: "user", // Se asigna el rol de administrador
 //                 createdAt: new Date()
 //             });
 //             console.log("Usuario creado como admin en Firestore");
@@ -32,7 +32,6 @@ import { getDoc, doc, setDoc } from "firebase/firestore";
 // };
 
 // Iniciar sesión con Firebase
-
 export const logIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
