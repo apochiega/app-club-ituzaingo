@@ -5,7 +5,7 @@ import EditPackageModal from "../../Components/Modal/EditPackageModal";
 import CreatePackageModal from "../../Components/Modal/CreatePackageModal";
 import DeleteConfirmationModal from "../../Components/Modal/DeletePackageModal";
 import { Button, Box, Typography, CircularProgress } from "@mui/material";
-import apiService from "../../axiosApiService/axiosWrapper";
+import apiService from "../../services/axiosWrapper";
 
 function PackagesPage() {
     const [coupons, setCoupons] = useState([]);

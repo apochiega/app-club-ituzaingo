@@ -1,6 +1,6 @@
 import React, { useState, useEffect, use } from "react";
 import { Modal, Box, TextField, Button } from "@mui/material";
-import apiService from "../../axiosApiService/axiosWrapper"
+import apiService from "../../services/axiosWrapper";
 
 function CreatePackageModal({ open, onClose, onCreate }) {
   const initialState = {

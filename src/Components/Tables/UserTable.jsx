@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
-import './userTable.css';
+import './UserTable.css';
 import EditUserModal from '../EditUserModal/EditUserModal';
 
 
@@ -32,41 +32,55 @@ export default function UserTable() {
   const [users,setUsers] = useState([]);
 
   useEffect(()=>{
-      const usersData= async()=>{
-          const response= await apiService.getAllUsers();
-          console.log("Datos de la API:", response.data);
-          setUsers(response.data)
+    const usersData= async()=>{
+      const response= await apiService.getAllUsers();
+      setUsers(response.data)
+    }
+    usersData()
+  }, []);
+
+  const handleDecrement = async (user_id) => {
+    let newTickets = null;
+  
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => {
+        if (user.user_id === user_id) 
+        {
+          if (user.tickets === 0) 
+          {
+            alert("No quedan tickets disponibles para este usuario.");
+            return user;
+          }
+          else
+          {
+            newTickets = user.tickets - 1; 
+            return { ...user, tickets: newTickets };
+          }
         }
-        usersData()
-    }, []);
-
-  const onEdit = (item) => {
-    console.log("Usuario seleccionado para edición:", item);
-    setSelectedUser(item);
-    setOpenModal(true);
-  };
-
-  const handleSave = (member_number, partidos, description) => { //member-number????
-    setUsers((prev) => ({
-      ...prev,
-      data: prev.map((user) =>
-        user.member_number === member_number
-          ? { ...user, partidos }
-          : user
-      ),
-    }));
-    console.log(`Guardando en BD: Usuario ${member_number}, Partidos: ${partidos}, Descripción: "${description}"`);
-  };
-
-  const handleDecrement = (member_number) => {
-    setUsers((prev) => ({
-      ...prev,
-      data: prev.data.map((user) =>
-        user.member_number === member_number && user.partidos > 0
-          ? { ...user, partidos: user.partidos - 1 }
-          : user
-      ),
-    }));
+        else
+        {
+          return user;
+        }
+      })
+    );
+  
+    if (newTickets === null) return; 
+    
+    try {
+      const userData = {
+        tickets: 1, 
+        // date: "2021-10-10",
+        description: "Se ha restado un ticket al usuario."
+      };
+  
+      await apiService.removeUserTickets(user_id, userData);
+  
+      console.log("Base de datos actualizada con éxito.");
+    } 
+    catch (error) {
+      console.error("Error al actualizar la base de datos:", error);
+      alert("Hubo un error al actualizar los tickets en la base de datos.");
+    }
   };
   
 

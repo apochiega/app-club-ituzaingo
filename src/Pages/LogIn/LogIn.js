@@ -2,7 +2,7 @@ import "./LogIn.css"
 import React, { useState } from "react";
 import { logIn } from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
-import apiService from "../../axiosApiService/axiosWrapper";
+import apiService from "../../services/axiosWrapper";
 
 // Componente Modal de Error
 const ErrorModal = ({ message, onClose }) => (
