@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import apiService from "../../axiosApiService/axiosWrapper";
+import apiService from "../../services/axiosWrapper";
 import "./HistoryTable.css";
 
 const columns = [
-  { id: "member_number", label: "N° Socio", minWidth: 100 },
-  { id: "email", label: "Email", minWidth: 200 },
+  { id: "user_id", label: "N° Socio", minWidth: 100 },
+  { id: "user_email", label: "Email", minWidth: 200 },
   { id: "tickets", label: "Tickets", minWidth: 100, align: "right" },
   { id: "date", label: "Fecha", minWidth: 120 },
   { id: "description", label: "Descripción", minWidth: 200 },
@@ -20,6 +20,7 @@ const HistoryTable = () => {
     const transactionsData = async () => {
       try {
         const response = await apiService.getAllTransactions();
+        // console.log("Datos de la API:", response.data);
         setTransactions(response.data);
         setTotalTransactions(response.totalTransactions || response.data.length); // asegurao que el total se actualiza
       } catch (error) {
@@ -58,7 +59,7 @@ const HistoryTable = () => {
             </thead>
             <tbody>
               {transactions.map((row) => (
-                <tr key={row.member_number}>
+                <tr key={row.firebase_uid}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (

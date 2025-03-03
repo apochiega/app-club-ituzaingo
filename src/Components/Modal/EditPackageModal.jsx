@@ -10,9 +10,13 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
 
   if (!updatedCoupon) return null;
 
+  const handleChange = (field) => (e) => {
+    setUpdatedCoupon({ ...updatedCoupon, [field]: e.target.value });
+  };
+  
   const handlePriceChange = (e) => {
     const value = e.target.value;
-    if (/^\d*(\.\d{0,2})?$/.test(value)) { // Permite números positivos con hasta 2 decimales y vacío
+    if (/^\d*(\.\d{0,2})?$/.test(value)) { 
       setUpdatedCoupon({ ...updatedCoupon, price: value });
     }
   };
@@ -35,9 +39,22 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
           gap: 2,
         }}
       >
-        <h2>Editar Ticket</h2>
-        <TextField label="Título" fullWidth value={updatedCoupon.title} margin="normal" disabled />
-        <TextField label="Descripción" fullWidth value={updatedCoupon.description} margin="normal" disabled />
+        <h2>Editar Paquete</h2>
+        <TextField
+          label="Título"
+          fullWidth
+          value={updatedCoupon.title}
+          onChange={handleChange("title")}
+          margin="normal"
+        />
+
+        <TextField
+          label="Descripción"
+          fullWidth
+          value={updatedCoupon.description}
+          onChange={handleChange("description")}
+          margin="normal"
+        />
         <TextField
           label="Precio"
           fullWidth
@@ -50,7 +67,7 @@ function EditPackageModal({ open, onClose, coupon, onSave }) {
           min="0"
         />
         <TextField
-          label="Tickets"
+          label="Cantidad de Partidos"
           fullWidth
           type="number"
           value={updatedCoupon.ticket_quantity}
