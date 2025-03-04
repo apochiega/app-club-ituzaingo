@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Box, TextField, Button, Typography } from '@mui/material';
 
-function CreateUserModal({ open, onClose, onCreaet }) {
+function CreateUserModal({ open, onClose, onCreate }) {
     const initialState = {
         name: "",
         email: "",
@@ -32,7 +32,7 @@ function CreateUserModal({ open, onClose, onCreaet }) {
 
     const handleCreate = () => {
         if(validateFields()) {
-            onCreaet(newUser);
+            onCreate(newUser);
             onClose();
         }
     };

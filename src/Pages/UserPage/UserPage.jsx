@@ -19,6 +19,7 @@ const UserPage = ()=>{
     };
 
     const handleCreateUser = async (newUser) => {
+        console.log(newUser);
         try {
             const response = await fetch("/api/users", {
                 method: "POST",
@@ -72,7 +73,7 @@ const UserPage = ()=>{
             <CreateUserModal
                 open={showForm}
                 onClose={() => setShowForm(false)}
-                onCreaet={handleCreateUser}
+                onCreate={handleCreateUser}
             />
         </div>
     )
