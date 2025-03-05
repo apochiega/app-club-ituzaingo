@@ -47,7 +47,6 @@
     right: 0;
     font-size: 30px;
     color: white;
-    padding: 15px;
     margin: 0;
     text-align: left;
     font-weight: bold;
@@ -59,20 +58,15 @@
   }
   
   @media (max-width: 768px) {
-    
-    .texto-paquete {
-        font-size: 25px;
-      }
-
 
     .container-image-text {
-      width: 90%;
+      min-width: 100%;
       max-width: 400px;
     }
   
     .texto-paquete {
-      font-size: 22px;
       padding: 12px;
+      font-size: 95% !important
     }
   }
   

@@ -13,9 +13,9 @@ const HomePage = () => {
                     Panel de administración del club
                 </div>
                 <div className="button-container">
-                    <ImagesButton text="Paquetes" image="./canchapadel.jpg" onClick={()=> navigate("/PackagePage")}/>
-                    <ImagesButton text="Usuarios" image="./canchapadel.jpg" onClick={()=> navigate("/UserPage")}/>
-                    <ImagesButton text= "Historial de transacciones" image= "./canchapadel.jpg" onClick={()=> navigate("/HistoryPage")}/>
+                    <ImagesButton text="Paquetes" image="./canchapadel.jpg" onClick={()=> navigate("/PackagePage")} fontSize="1.6em"/>
+                    <ImagesButton text="Usuarios" image="./canchapadel.jpg" onClick={()=> navigate("/UserPage")} fontSize="1.6em"/>
+                    <ImagesButton text= "Historial de transacciones" image= "./canchapadel.jpg" onClick={()=> navigate("/HistoryPage")}  fontSize="1.6em" />
                 </div>
             </div>
         </div>

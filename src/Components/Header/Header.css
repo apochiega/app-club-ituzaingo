@@ -1,6 +1,11 @@
 .image{
     cursor: pointer;
 }
+.inicio
+{
+    cursor: pointer;
+    font-weight: 550;
+}
 
 @media (max-width: 480px) { 
     .image {
