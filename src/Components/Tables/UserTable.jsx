@@ -12,19 +12,17 @@ import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
 import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
 import './UserTable.css';
-import EditUserModal from '../EditUserModal/EditUserModal';
 
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170, align: 'left' },
-  { id: 'phone_number', label: 'Número de Celular', minWidth: 170, align: 'left' },
   { id: 'email', label: 'Email', minWidth: 170, align: 'left' },
   { id: 'user_id', label: 'Número de Socio', minWidth: 100, align: 'left' },
   { id: 'tickets', label: 'Partidos', minWidth: 100, align: 'left' },
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
 ];
 
-export default function UserTable({user_id}) {
+export default function UserTable({user_id, refresh}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
@@ -47,7 +45,7 @@ export default function UserTable({user_id}) {
       }
       userData()
     }
-  }, [user_id]);
+  }, [user_id, refresh]);
 
 
   const handleDecrement = async (user_id) => {

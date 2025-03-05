@@ -1,33 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserTable from "../../Components/Tables/UserTable";
 import GreenButton from "../../Components/greenButton/greenButton";
 import "./UserPage.css";
 import CreateUserModal from "../../Components/Modal/CreateUserModal";
 import { Button, Box } from "@mui/material";
+import apiService from "../../services/axiosWrapper"
 
 const UserPage = ()=>{
 
     const [userId, setUserId] = useState("");
     const [searchedValue, setSearchedValue]= useState("");
     const [showForm, setShowForm] = useState(false);
+    const [refresh, setRefresh] = useState(false);
+    const [newUser, setNewUser] = useState({
+        name: "",
+        email: "",
+    });
 
     const handleSearchUser = () => {
         setUserId(searchedValue)
     };
 
     const handleCreateUser = async (newUser) => {
-         try {
-             const response = await fetch("/api/users", {
-                 method: "POST",
-                 headers: {
-                     "Content-Type": "application/json",
-                 },
-                 body: JSON.stringify(newUser),
-             });
-           } catch (error) {
-             console.error("Error al crear usuario", error);
-           }
-     };
+        console.log(newUser);
+        try {
+            await apiService.registerUserByAdmin(newUser);
+            setRefresh(prev => !prev);
+        } 
+        catch (error) {
+            console.error("Error al crear usuario", error);
+        }
+    };
 
     return(
         <div>
@@ -63,7 +66,7 @@ const UserPage = ()=>{
             </Box>
 
             <div className="mt">
-              <UserTable user_id={userId}/>
+              <UserTable user_id={userId} refresh={refresh}/>
             </div>
 
             <CreateUserModal
