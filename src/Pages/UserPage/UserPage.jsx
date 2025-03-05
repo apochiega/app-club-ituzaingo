@@ -11,6 +11,7 @@ const UserPage = ()=>{
     const [userId, setUserId] = useState("");
     const [searchedValue, setSearchedValue]= useState("");
     const [showForm, setShowForm] = useState(false);
+    const [refresh, setRefresh] = useState(false);
     const [newUser, setNewUser] = useState({
         name: "",
         email: "",
@@ -24,6 +25,7 @@ const UserPage = ()=>{
         console.log(newUser);
         try {
             await apiService.registerUserByAdmin(newUser);
+            setRefresh(prev => !prev);
         } 
         catch (error) {
             console.error("Error al crear usuario", error);
@@ -64,7 +66,7 @@ const UserPage = ()=>{
             </Box>
 
             <div className="mt">
-              <UserTable user_id={userId}/>
+              <UserTable user_id={userId} refresh={refresh}/>
             </div>
 
             <CreateUserModal
