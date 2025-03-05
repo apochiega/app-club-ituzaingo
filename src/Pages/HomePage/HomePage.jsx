@@ -13,7 +13,7 @@ const HomePage = () => {
                     Panel de administración del club
                 </div>
                 <div className="button-container">
-                    <ImagesButton text="Tickets" image="./canchapadel.jpg" onClick={()=> navigate("/PackagePage")}/>
+                    <ImagesButton text="Paquetes" image="./canchapadel.jpg" onClick={()=> navigate("/PackagePage")}/>
                     <ImagesButton text="Usuarios" image="./canchapadel.jpg" onClick={()=> navigate("/UserPage")}/>
                     <ImagesButton text= "Historial de transacciones" image= "./canchapadel.jpg" onClick={()=> navigate("/HistoryPage")}/>
                 </div>

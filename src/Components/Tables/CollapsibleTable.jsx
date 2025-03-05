@@ -1,10 +1,11 @@
 import React from "react";
 import { Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,IconButton,Collapse,Box,Typography,useMediaQuery} from "@mui/material";
 import { Edit, Delete, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import InfoIcon from '@mui/icons-material/Info';
 
 const columnTitles = {
   title: "Título",
-  ticket_quantity: "Cantidad de Tickets",
+  ticket_quantity: "Cantidad de Partidos",
   description: "Descripción",
   price: "Precio"
 };
@@ -32,7 +33,6 @@ function Row({ item, keysToShow, onDelete, onEdit, isMobile }) {
           .map((key, index) => (
             <TableCell key={index}>{item[key]}</TableCell>
           ))}
-        {/* {isHistory === 0 && ( */}
           <TableCell>
             <IconButton onClick={() => onEdit(item)} color="primary">
               <Edit />
@@ -41,7 +41,6 @@ function Row({ item, keysToShow, onDelete, onEdit, isMobile }) {
               <Delete />
             </IconButton>
           </TableCell>
-        {/* )} */}
       </TableRow>
 
       {/* Opcion colapsable solo en mobile */}
@@ -76,7 +75,23 @@ const CollapsibleTable = ({ data, keysToShow, onDelete, onEdit, isHistory }) => 
   const isMobile = useMediaQuery("(max-width:768px)"); // Detecta si es pantalla móvil
 
   if (!data || data.length === 0) {
-    return <p>No hay datos disponibles</p>;
+    return (
+      
+      <Box 
+        display="flex" 
+        flexDirection="column" 
+        justifyContent="center" 
+        alignItems="center" 
+        height="20vh"
+        color="gray"
+        fontSize="18px"
+        fontWeight="500"
+        textAlign="center"
+      >
+        <InfoIcon sx={{ fontSize: 50, color: "#255E13" }} />
+        <Typography variant="h6" color="#255E13" >No hay paquetes disponibles</Typography>
+      </Box>
+    );
   }
 
   return (

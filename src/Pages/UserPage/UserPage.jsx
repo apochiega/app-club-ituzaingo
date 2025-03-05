@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UserTable from "../../Components/Tables/userTable";
+import UserTable from "../../Components/Tables/UserTable";
 import GreenButton from "../../Components/greenButton/greenButton";
 import "./UserPage.css";
 import CreateUserModal from "../../Components/Modal/CreateUserModal";

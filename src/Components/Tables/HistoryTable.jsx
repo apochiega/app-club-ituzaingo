@@ -20,7 +20,7 @@ const HistoryTable = () => {
     const transactionsData = async () => {
       try {
         const response = await apiService.getAllTransactions();
-        console.log("Datos de la API:", response.data);
+        // console.log("Datos de la API:", response.data);
         setTransactions(response.data);
         setTotalTransactions(response.totalTransactions || response.data.length); // asegurao que el total se actualiza
       } catch (error) {
