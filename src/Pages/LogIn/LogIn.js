@@ -1,7 +1,8 @@
 import "./LogIn.css"
-import React, { useState } from "react";
-import { logIn } from "../../services/AuthService";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { logIn, getUserRole } from "../../services/AuthService"; // Asegúrate de importar getUserRole
+import { auth } from "../../services/firebase";
 import apiService from "../../services/axiosWrapper";
 
 // Componente Modal de Error
@@ -67,26 +68,62 @@ const ErrorModal = ({ message, onClose }) => (
     </div>
 );
 
+
+
+
+
 const LogIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-
+    const [loading, setLoading] = useState(false);
+    
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Leer error desde query params
+    useEffect(() => {
+        const query = new URLSearchParams(location.search);
+        const errorParam = query.get("error");
+        if (errorParam) {
+            setError(errorParam);
+        }
+    }, [location.search]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
+        setLoading(true);
         try {
+            // Autenticar usuario
             const user = await logIn(email, password);
-            await apiService.logUser();
-            
-            if (user) {
-                navigate("/");
+            if (!user) throw new Error("Credenciales incorrectas.");
+
+            // Comprobar si el rol está cacheado
+            let role = sessionStorage.getItem(`role_${user.uid}`);
+            if (!role) {
+                role = await getUserRole(user.uid);
+                // Guarda en cache si se obtuvo el rol
+                if (role) {
+                    sessionStorage.setItem(`role_${user.uid}`, role);
+                }
             }
+            console.log("Rol obtenido:", role);
+
+            if (!role || role !== "admin") {
+                await auth.signOut();
+                setError("No tienes permisos para acceder.");
+                setLoading(false);
+                return;
+            }
+
+            // Redirigir cuando todo es correcto
+            navigate("/");
         } catch (error) {
-            // console.log(error.message);
-            setError("Las credenciales ingresadas son incorrectas. Por favor, verificá tus datos e intentá nuevamente.");
+            console.error("Error en inicio de sesión:", error);
+            setError("Las credenciales ingresadas son incorrectas o no tienes permiso para acceder.");
         }
+        setLoading(false);
     };
 
     return (
@@ -96,11 +133,11 @@ const LogIn = () => {
                 <h2>Iniciar sesión</h2>
                 <p>Ingrese sus credenciales para acceder al panel de administración</p>
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <label className="label-login">Correo electronico</label>
+                    <label className="label-login">Correo electrónico</label>
                     <input
                         className="input-login"
                         type="email"
-                        placeholder="ingrese su correo"
+                        placeholder="Ingrese su correo"
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
@@ -108,15 +145,16 @@ const LogIn = () => {
                     <input
                         className="input-login"
                         type="password"
-                        placeholder="ingrese su contraseña"
+                        placeholder="Ingrese su contraseña"
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button className="login-button" type="submit">Iniciar Sesión</button>
+                    <button className="login-button" type="submit" disabled={loading}>
+                        {loading ? "Validando permisos..." : "Iniciar Sesión"}
+                    </button>
                 </form>
             </div>
 
-            {/* Mostrar el modal de error si existe un mensaje */}
             {error && <ErrorModal message={error} onClose={() => setError(null)} />}
         </div>
     );
