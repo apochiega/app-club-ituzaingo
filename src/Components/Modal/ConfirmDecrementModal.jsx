@@ -14,6 +14,10 @@ const style = {
     width: { xs: "80%", md: "40%" },
     bgcolor: 'background.paper',
     boxShadow: 24,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     p:6
   };
 
@@ -26,16 +30,11 @@ export default function ConfirmDecrementModal({ open, handleClose, handleConfirm
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontWeight: 100 }}>
-          Confirmar Acción
+        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontWeight: 550 , textAlign: "center"}}>
+          ¿Confirmas restar un partido?
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          ¿Estás seguro de que quieres restar un partido?
-        </Typography>
-        <Box sx={{ mt: 6, display: 'flex', justifyContent: 'space-between' }}>
-          {/* <Button variant="contained" color="primary" onClick={handleConfirm}>
-            Confirmar
-          </Button> */}
+      
+        <Box sx={{ width:'100%', mt: 6, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <GreenButton text="Confirmar" minWidth="20%" onClick={handleConfirm} />
           <Button variant="outlined" color="secondary" onClick={handleClose}  sx={{ color: "red", borderColor: "red", "&:hover": { borderColor: "darkred", color: "darkred" } }}>
             Cancelar

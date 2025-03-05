@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
-import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
+import ConfirmDecrementModal from '../Modal/ConfirmDecrementModal';
 import ErrorModal from '../Modal/ErrorModal';
 import './UserTable.css';
 
@@ -109,10 +109,21 @@ export default function UserTable({user_id, refresh}) {
   const rows = users.map((item) => ({ 
     ...item,
     edit: (
-      <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
-        <IconButton  onClick={() => handleOpenConfirmModal(item.user_id)}  color="primary">
-          <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
-        </IconButton>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+        <button
+          onClick={() => handleOpenConfirmModal(item.user_id)}
+          style={{
+            backgroundColor: 'darkred',
+            color: 'white',
+            border: 'none',
+            padding: '4px 8px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '12px',
+          }}
+        >
+          Restar Partido
+        </button>
       </div>
     ),
   }));
