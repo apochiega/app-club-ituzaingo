@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserTable from "../../Components/Tables/UserTable";
 import GreenButton from "../../Components/greenButton/greenButton";
 import "./UserPage.css";
 import CreateUserModal from "../../Components/Modal/CreateUserModal";
 import { Button, Box } from "@mui/material";
+import apiService from "../../services/axiosWrapper"
 
 const UserPage = ()=>{
 
@@ -21,16 +22,11 @@ const UserPage = ()=>{
     const handleCreateUser = async (newUser) => {
         console.log(newUser);
         try {
-            const response = await fetch("/api/users", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newUser),
-            });
-          } catch (error) {
+            await apiService.createUser(newUser);
+        } 
+        catch (error) {
             console.error("Error al crear usuario", error);
-          }
+        }
     };
 
     return(

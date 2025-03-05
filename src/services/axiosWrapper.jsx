@@ -7,6 +7,7 @@ const api = axios.create({
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
     (config) => { //objeto config tiene la configuracion de la request 
         const token = sessionStorage.getItem("accessToken"); // obtengo token almacenado
+        // console.log(token);
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
             config.headers["Content-Type"] = 'application/json';
@@ -22,6 +23,7 @@ const apiService = {
     getUserById: (userId)=> api.get(`/user/getUserById/${userId}`),
     logUser: () => api.post("/user/logUser"),
     removeUserTickets: (userId, newTicketsData) => api.post(`/user/removeTickets/${userId}`, newTicketsData), //anadir y eliminar tickets o actualizar los tickets?
+    createUser: (userData) => api.post(`/user/registerUserByAdmin`, userData),
 
     //Llamadas de Paquetes
     createPackage: (packageData) => api.post("/package/createPackage", packageData),
