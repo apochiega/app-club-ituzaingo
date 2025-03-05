@@ -3,20 +3,70 @@
     border: none;
     width: 45%;
     background: none;
-}
-
-.imagen-cancha {
+    overflow: hidden;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .container-image-text:hover {
+    transform: scale(1.03);
+  }
+  
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .imagen-cancha {
     width: 100%;
     height: auto;
     border-radius: 20px;
-}
-
-.texto-paquete {
+    display: block;
+  }
+  
+  .overlay {
     position: absolute;
-    bottom: 0px;
-    left: 25px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
+  }
+  
+  .container-image-text:hover .overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .texto-paquete {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     font-size: 25px;
     color: white;
-    padding: 0px;
-}
-
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+  
+  @media (max-width: 768px) {
+    
+    .container-image-text {
+      width: 90%;
+      max-width: 400px;
+    }
+  
+    .texto-paquete {
+      font-size: 22px;
+      padding: 12px;
+    }
+  }
+  
+  
