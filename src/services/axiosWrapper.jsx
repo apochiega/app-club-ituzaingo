@@ -7,7 +7,7 @@ const api = axios.create({
 api.interceptors.request.use( //modifico la request antes que se envie al servidor
     (config) => { //objeto config tiene la configuracion de la request 
         const token = sessionStorage.getItem("accessToken"); // obtengo token almacenado
-        // console.log(token);
+        console.log(token);
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`; // agregar token al header
             config.headers["Content-Type"] = 'application/json';

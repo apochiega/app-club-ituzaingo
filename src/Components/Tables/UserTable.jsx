@@ -32,23 +32,38 @@ export default function UserTable({user_id, refresh}) {
   const [users,setUsers] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(()=>{
-    if(user_id){
-      const userDataById= async()=>{
-        const response= await apiService.getUserById(user_id);
-        console.log(user_id)
-        setUsers(Array.isArray(response.data) ? response.data : [response.data]);
-      }
-      userDataById()
-    }
-    else{
-      const userData= async()=>{
-        const response= await apiService.getAllUsers();
-        setUsers(response.data)
-      }
-      userData()
+  useEffect(() => {
+    if (user_id) {
+      const userDataById = async () => {
+        try {
+          const response = await apiService.getUserById(user_id);
+          console.log(user_id);
+          setUsers(Array.isArray(response.data) ? response.data : [response.data]);
+          setPage(0);
+
+        } catch (error) {
+          console.error("Error al buscar el usuario:", error);
+          setUsers([]); 
+          setError("No se encontró el usuario con ese número de socio.");
+        }
+      };
+      userDataById();
+    } else {
+      const userData = async () => {
+        try {
+          const response = await apiService.getAllUsers();
+          setUsers(response.data);
+          // setError(null);
+        } catch (error) {
+          console.error("Error al cargar los usuarios:", error);
+          setUsers([]);
+          setError("Hubo un problema al cargar la lista de usuarios.");
+        }
+      };
+      userData();
     }
   }, [user_id, refresh]);
+  
 
 
   const handleDecrement = async (user_id) => {
