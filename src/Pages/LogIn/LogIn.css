@@ -65,5 +65,12 @@
     color: #1b5e20;
     margin-bottom: 5px;
   }
+
+  @media screen and (max-width: 768px) {
+    .logo{
+      width: 250px;
+      height: 150px;
+    }
+  }
   
   
