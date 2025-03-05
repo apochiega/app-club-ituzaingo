@@ -49,11 +49,13 @@
     color: white;
     padding: 15px;
     margin: 0;
-    text-align: center;
+    text-align: left;
     font-weight: bold;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    margin-left: 10%;
+    margin-bottom: 5%;
   }
   
   @media (max-width: 768px) {
