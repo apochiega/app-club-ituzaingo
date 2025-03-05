@@ -8,7 +8,8 @@ import apiService from "../../services/axiosWrapper"
 
 const UserPage = ()=>{
 
-    const [userNumber, setUserNumber] = useState("");
+    const [userId, setUserId] = useState("");
+    const [searchedValue, setSearchedValue]= useState("");
     const [showForm, setShowForm] = useState(false);
     const [newUser, setNewUser] = useState({
         name: "",
@@ -16,13 +17,13 @@ const UserPage = ()=>{
     });
 
     const handleSearchUser = () => {
-        //peticion a la api para encontrar el usuario
+        setUserId(searchedValue)
     };
 
     const handleCreateUser = async (newUser) => {
         console.log(newUser);
         try {
-            await apiService.createUser(newUser);
+            await apiService.registerUserByAdmin(newUser);
         } 
         catch (error) {
             console.error("Error al crear usuario", error);
@@ -40,8 +41,8 @@ const UserPage = ()=>{
                 <input
                 type="text"
                 className="form-control w-50"
-                value={userNumber}
-                onChange={(e) => setUserNumber(e.target.value)}
+                value={searchedValue}
+                onChange={(e) => setSearchedValue(e.target.value)}
                 placeholder="Ingrese el numero de socio"
                 />
                 <GreenButton text="Buscar" minWidth="20%" onClick={handleSearchUser} />
@@ -63,7 +64,7 @@ const UserPage = ()=>{
             </Box>
 
             <div className="mt">
-              <UserTable/>
+              <UserTable user_id={userId}/>
             </div>
 
             <CreateUserModal

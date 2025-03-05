@@ -24,7 +24,7 @@ const columns = [
   { id: 'edit', label: 'Acción', minWidth: 100, align: 'center' },
 ];
 
-export default function UserTable() {
+export default function UserTable({user_id}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
@@ -32,12 +32,23 @@ export default function UserTable() {
   const [users,setUsers] = useState([]);
 
   useEffect(()=>{
-    const usersData= async()=>{
-      const response= await apiService.getAllUsers();
-      setUsers(response.data)
+    if(user_id){
+      const userDataById= async()=>{
+        const response= await apiService.getUserById(user_id);
+        console.log(user_id)
+        setUsers(Array.isArray(response.data) ? response.data : [response.data]);
+      }
+      userDataById()
     }
-    usersData()
-  }, []);
+    else{
+      const userData= async()=>{
+        const response= await apiService.getAllUsers();
+        setUsers(response.data)
+      }
+      userData()
+    }
+  }, [user_id]);
+
 
   const handleDecrement = async (user_id) => {
     let newTickets = null;
@@ -115,6 +126,7 @@ export default function UserTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
