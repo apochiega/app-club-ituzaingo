@@ -1,6 +1,7 @@
 import React, { useState, useEffect, use } from "react";
 import { Modal, Box, TextField, Button } from "@mui/material";
 import apiService from "../../services/axiosWrapper";
+import ErrorModal from "./ErrorModal";
 
 function CreatePackageModal({ open, onClose, onCreate }) {
   const initialState = {
@@ -12,14 +13,13 @@ function CreatePackageModal({ open, onClose, onCreate }) {
   };
 
   const [user, setUser] = useState([]);
-  // const [newCoupon, setNewCoupon] = useState(initialState);
-
   const [newPackage, setNewPackage] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-      setUser(sessionStorage.getItem("uid") );
+    setUser(sessionStorage.getItem("uid") );
   }, []);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function CreatePackageModal({ open, onClose, onCreate }) {
 
     } catch (error) {
       console.error("Error al crear el paquete:", error);
-      alert("Hubo un error al crear el paquete. Inténtalo de nuevo.");
+      setError("Hubo un error al crear el paquete. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -75,78 +75,81 @@ function CreatePackageModal({ open, onClose, onCreate }) {
   };
 
   return (
-    <Modal open={open} onClose={onClose}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "white",
-          padding: 4,
-          borderRadius: 2,
-          boxShadow: 3,
-          width: 400,
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
-      >
-        <h2>Crear Paquete</h2>
-        <TextField
-          label="Título"
-          fullWidth
-          value={setNewPackage.title}
-          onChange={(e) => setNewPackage({ ...newPackage, title: e.target.value })}
-          margin="normal"
-          error={!!errors.title}
-          helperText={errors.title}
-        />
-        <TextField
-          label="Descripción"
-          fullWidth
-          value={newPackage.description}
-          onChange={(e) => setNewPackage({ ...newPackage, description: e.target.value })}
-          margin="normal"
-          error={!!errors.description}
-          helperText={errors.description}
-        />
-        <TextField
-          label="Precio"
-          fullWidth
-          type="text"
-          value={newPackage.price}
-          onChange={(e) => handleNumberChange("price", e.target.value)}
-          margin="normal"
-          error={!!errors.price}
-          helperText={errors.price}
-        />
-        <TextField
-          label="Cantidad de Partidos"
-          fullWidth
-          type="text"
-          value={newPackage.ticket_quantity}
-          onChange={(e) => handleNumberChange("ticket_quantity", e.target.value)}
-          margin="normal"
-          error={!!errors.ticket_quantity}
-          helperText={errors.ticket_quantity}
-        />
-        <Button
-          variant="contained"
-          onClick={handleCreate}
+    <div>
+      <Modal open={open} onClose={onClose}>
+        <Box
           sx={{
-            mt: 2,
-            alignSelf: "center",
-            backgroundColor: "#255E13",
-            '&:hover': {
-              backgroundColor: "#1E4D10"
-            }
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            padding: 4,
+            borderRadius: 2,
+            boxShadow: 3,
+            width: 400,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
           }}
         >
-          Crear
-        </Button>
-      </Box>
-    </Modal>
+          <h2>Crear Paquete</h2>
+          <TextField
+            label="Título"
+            fullWidth
+            value={setNewPackage.title}
+            onChange={(e) => setNewPackage({ ...newPackage, title: e.target.value })}
+            margin="normal"
+            error={!!errors.title}
+            helperText={errors.title}
+          />
+          <TextField
+            label="Descripción"
+            fullWidth
+            value={newPackage.description}
+            onChange={(e) => setNewPackage({ ...newPackage, description: e.target.value })}
+            margin="normal"
+            error={!!errors.description}
+            helperText={errors.description}
+          />
+          <TextField
+            label="Precio"
+            fullWidth
+            type="text"
+            value={newPackage.price}
+            onChange={(e) => handleNumberChange("price", e.target.value)}
+            margin="normal"
+            error={!!errors.price}
+            helperText={errors.price}
+          />
+          <TextField
+            label="Cantidad de Partidos"
+            fullWidth
+            type="text"
+            value={newPackage.ticket_quantity}
+            onChange={(e) => handleNumberChange("ticket_quantity", e.target.value)}
+            margin="normal"
+            error={!!errors.ticket_quantity}
+            helperText={errors.ticket_quantity}
+          />
+          <Button
+            variant="contained"
+            onClick={handleCreate}
+            sx={{
+              mt: 2,
+              alignSelf: "center",
+              backgroundColor: "#255E13",
+              '&:hover': {
+                backgroundColor: "#1E4D10"
+              }
+            }}
+          >
+            Crear
+          </Button>
+        </Box>
+      </Modal>
+      {error && <ErrorModal message={error} onClose={() => setError(null)} />}
+    </div>
   );
 }
 

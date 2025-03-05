@@ -10,7 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from "@mui/material/IconButton";
 import { LocalActivity } from "@mui/icons-material";
-import ConfirmDecrementModal from '../ConfirmDecrementModal/ConfirmDecrementModal';
+import ConfirmDecrementModal from '../Modal/ConfirmDecrementModal';
+import ErrorModal from '../Modal/ErrorModal';
 import './UserTable.css';
 
 
@@ -29,6 +30,7 @@ export default function UserTable({user_id, refresh}) {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [userToDecrement, setUserToDecrement] = useState(null);
   const [users,setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(()=>{
     if(user_id){
@@ -58,7 +60,7 @@ export default function UserTable({user_id, refresh}) {
         {
           if (user.tickets === 0) 
           {
-            alert("No quedan partidos disponibles para este usuario.");
+            setError("No quedan partidos disponibles para este usuario.");
             return user;
           }
           else
@@ -89,7 +91,7 @@ export default function UserTable({user_id, refresh}) {
     } 
     catch (error) {
       console.error("Error al actualizar la base de datos:", error);
-      alert("Hubo un error al actualizar los partidos en la base de datos.");
+      setError("Hubo un error al actualizar los partidos en la base de datos.");
     }
   };
   
@@ -108,10 +110,21 @@ export default function UserTable({user_id, refresh}) {
   const rows = users.map((item) => ({ 
     ...item,
     edit: (
-      <div style={{ display: 'flex', flexDirection:'row', justifyContent:'space-around' }} >
-        <IconButton  onClick={() => handleOpenConfirmModal(item.user_id)}  color="primary">
-          <LocalActivity sx={{ color: 'darkred' , fontSize : '100%'}} />
-        </IconButton>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+        <button
+          onClick={() => handleOpenConfirmModal(item.user_id)}
+          style={{
+            backgroundColor: 'darkred',
+            color: 'white',
+            border: 'none',
+            padding: '4px 8px',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: '12px',
+          }}
+        >
+          Restar Partido
+        </button>
       </div>
     ),
   }));
@@ -178,6 +191,8 @@ export default function UserTable({user_id, refresh}) {
         handleClose={() => setOpenConfirmModal(false)}
         handleConfirm={handleConfirmDecrement}
       />
+      {error && <ErrorModal message={error} onClose={() => setError(null)} />}
     </Paper>
+    
   );
 }
