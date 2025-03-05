@@ -20,15 +20,14 @@ const HistoryTable = () => {
     const transactionsData = async () => {
       try {
         const response = await apiService.getAllTransactions();
-        // console.log("Datos de la API:", response.data);
         setTransactions(response.data);
-        setTotalTransactions(response.totalTransactions || response.data.length); // asegurao que el total se actualiza
+        setTotalTransactions(response.totalTransactions || response.data.length);
       } catch (error) {
         console.error("Error obteniendo transacciones", error);
       }
     };
     transactionsData();
-  }, [page, rowsPerPage]); 
+  }, [page, rowsPerPage]);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -58,7 +57,7 @@ const HistoryTable = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((row) => (
+              {transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                 <tr key={row.firebase_uid}>
                   {columns.map((column) => {
                     const value = row[column.id];
