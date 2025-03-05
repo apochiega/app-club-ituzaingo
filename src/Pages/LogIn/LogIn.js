@@ -37,11 +37,13 @@ const LogIn = () => {
             const user = await logIn(email, password);
             if (!user) throw new Error("Credenciales incorrectas.");
 
+            // Llamada a logUser para registrar el inicio de sesión en el backend
+            await apiService.logUser();
+
             // Comprobar si el rol está cacheado
             let role = sessionStorage.getItem(`role_${user.uid}`);
             if (!role) {
                 role = await getUserRole(user.uid);
-                // Guarda en cache si se obtuvo el rol
                 if (role) {
                     sessionStorage.setItem(`role_${user.uid}`, role);
                 }
