@@ -1,9 +1,30 @@
+/* Centrar el título */
 .title {
-    font-size: 40px;
-    font-weight: bold;
-    margin: 20px 0;
-}
-
+    text-align: center;
+    font-size: 2em; /* Ajusta el tamaño según prefieras */
+    margin-bottom: 20px;
+  }
+  
+  /* Opcional: centrar el contenedor general */
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Ajustar el contenedor de botones para que se distribuyan de forma horizontal */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Reducir a la mitad el tamaño de las imágenes dentro de los botones */
+  .button-container img {
+    width: 50%;
+    height: auto;
+  }
+  
 .button-container {
     display: flex;
     gap: 40px;  
