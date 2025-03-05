@@ -22,7 +22,8 @@ const apiService = {
     getUserById: (userId)=> api.get(`/user/getUserById/${userId}`),
     logUser: () => api.post("/user/logUser"),
     removeUserTickets: (userId, newTicketsData) => api.post(`/user/removeTickets/${userId}`, newTicketsData), //anadir y eliminar tickets o actualizar los tickets?
-
+    registerUserByAdmin: ()=> api.post("/user/registerUserByAdmin"),
+    
     //Llamadas de Paquetes
     createPackage: (packageData) => api.post("/package/createPackage", packageData),
     deletePackage: (packageId) => api.post(`/package/deletePackageByID/${packageId}`),
