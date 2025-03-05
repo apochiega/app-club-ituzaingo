@@ -9,10 +9,6 @@ const UserPage = ()=>{
 
     const [userNumber, setUserNumber] = useState("");
     const [showForm, setShowForm] = useState(false);
-    const [newUser, setNewUser] = useState({
-        name: "",
-        email: "",
-    });
 
     const handleSearchUser = () => {
         //peticion a la api para encontrar el usuario
@@ -72,7 +68,7 @@ const UserPage = ()=>{
             <CreateUserModal
                 open={showForm}
                 onClose={() => setShowForm(false)}
-                onCreaet={handleCreateUser}
+                onCreate={handleCreateUser}
             />
         </div>
     )
