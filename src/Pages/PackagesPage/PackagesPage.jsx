@@ -6,6 +6,7 @@ import CreatePackageModal from "../../Components/Modal/CreatePackageModal";
 import DeleteConfirmationModal from "../../Components/Modal/DeletePackageModal";
 import { Button, Box, Typography, CircularProgress } from "@mui/material";
 import apiService from "../../services/axiosWrapper";
+import ErrorModal from "../../Components/Modal/ErrorModal";
 
 function PackagesPage() {
 
@@ -15,6 +16,7 @@ function PackagesPage() {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [currentCoupon, setCurrentCoupon] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const firebase_uid = sessionStorage.getItem("uid");
 
     useEffect(() => {
@@ -89,7 +91,7 @@ function PackagesPage() {
             handleCloseModal(setCreateModalOpen);
         } catch (error) {
             console.error("Error al crear el paquete:", error);
-            alert("Hubo un error al crear el paquete. Inténtalo de nuevo.");
+            setError("Hubo un error al crear el paquete. Inténtalo de nuevo.");
         } finally {
             setIsLoading(false);
         }
@@ -153,6 +155,7 @@ function PackagesPage() {
                 onConfirm={handleDeleteConfirm}
                 item={currentCoupon}
             />
+            {error && <ErrorModal message={error} onClose={() => setError(null)} />}
         </div>
     );
 }

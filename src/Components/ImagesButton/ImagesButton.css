@@ -1,22 +1,59 @@
+/* Contenedor del botón con layout en columna */
 .container-image-text {
-    position: relative;
-    border: none;
-    width: 45%;
-    background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  width: 45%;
+  background: none;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  padding: 15px;
+  position: relative;
+  margin: 10px;
 }
 
+.container-image-text:hover {
+  transform: scale(1.03);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de la imagen para centrar el icono */
+.image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos de la imagen (icono) */
 .imagen-cancha {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
+  width: 50%; /* Ajusta este valor para cambiar el tamaño del icono */
+  height: auto;
+  border-radius: 20px;
+  display: block;
 }
 
+/* Texto que se muestra debajo del icono */
 .texto-paquete {
-    position: absolute;
-    bottom: 0px;
-    left: 25px;
-    font-size: 25px;
-    color: white;
-    padding: 0px;
+  margin-top: 10px;
+  font-size: 30px;
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Adaptación para dispositivos móviles */
+@media (max-width: 768px) {
+  .container-image-text {
+    width: 90%;
+    max-width: 400px;
+  }
+  .texto-paquete {
+    font-size: 22px;
+  }
+}

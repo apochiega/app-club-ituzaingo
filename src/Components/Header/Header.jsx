@@ -24,7 +24,7 @@ const Header = ()=>{
                 <img className="w-25 image"  onClick={handleClick} src="/padelogo.png" alt="logo"></img>
             </div>
             <div className="d-flex gap-3">
-                <button className="btn btn-danger btn-md ml-2 inicio" alt="log out" onClick={handleLogout}>Logout</button>
+                <button className="btn btn-danger btn-md ml-2 inicio" alt="log out" onClick={handleLogout}>Cerrar sesión</button>
             </div>
         </div>
     )
